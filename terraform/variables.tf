@@ -12,3 +12,14 @@ variable "centos-7-base" {
   default = "fd8sgdi3n1kbkn8n5hql"
 }
 
+
+variable "zone" {
+  type        = string
+  default     = "ru-central1-a"
+}
+
+variable "db_count" {
+  description = "Number of Virtual Machines"
+  default     = 2
+  type        = string
+}

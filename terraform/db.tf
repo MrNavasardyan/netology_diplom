@@ -1,5 +1,5 @@
-resource "yandex_compute_instance" "vm-count" {
- count          = var.vm_count
+resource "yandex_compute_instance" "db-count" {
+ count          = var.db_count
  name = "db-${count.index}-${terraform.workspace}"
 
  resources {
