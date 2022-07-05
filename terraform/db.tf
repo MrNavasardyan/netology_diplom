@@ -14,7 +14,7 @@ resource "yandex_compute_instance" "db-count" {
  }
 
    metadata = {
-   ssh-keys = "centos:${file("~/.ssh/yc.pub")}"
+   ssh-keys = "centos:${file("~/.ssh/yc_key.pub")}"
  }
 
 
