@@ -1,6 +1,6 @@
 resource "yandex_compute_instance" "db-count" {
  count          = var.db_count
- name = "db-${count.index}-${var.my_domain}-${terraform.workspace}"
+ name = "db-${count.index}-${terraform.workspace}"
 
  resources {
        cores = "2"
