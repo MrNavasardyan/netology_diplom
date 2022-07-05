@@ -1,1 +1,2 @@
 # netology_diplom
+Проверка!
