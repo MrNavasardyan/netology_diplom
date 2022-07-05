@@ -1,5 +1,5 @@
 resource "yandex_compute_instance" "gitlab" {
- name = "gitlab-${terraform.workspace}"
+ name = "gitlab-${var.my_domain}-${terraform.workspace}"
 
  resources {
        cores = "2"

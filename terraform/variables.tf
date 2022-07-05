@@ -24,3 +24,9 @@ variable "db_count" {
   default     = 2
   type        = string
 }
+
+variable "my_domain" {
+  default = "my_domain"
+  description = "Name for VM"
+  type        = string
+}
