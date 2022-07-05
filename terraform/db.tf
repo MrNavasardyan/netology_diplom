@@ -1,30 +1,3 @@
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
-  }
-  required_version = ">= 0.13"
-  #backend "s3" {
-   #  endpoint   = "storage.yandexcloud.net"
-    # bucket     = "tf-state-bucket-gnavasardyan"
-     #region     = "ru-central1-a"
-     #key        = "terraform/infrastructure1/terraform.tfstate"
-     #access_key = "YCAJEPie5HNBklZlGOmrxRkY6"
-     #secret_key = "YCNP8puzHOBgiyOg1AYRGzWEhS71m1oxoksO2-yv"
-
-     #skip_region_validation      = true
-     #skip_credentials_validation = true
-  #}
-}
-
-provider "yandex" {
-  token     = var.token_auth
-  cloud_id  = var.cloud_id
-  folder_id = var.yandex_folder_id
-  zone      = var.zone
-}
-
 resource "yandex_compute_instance" "vm-count" {
  count          = var.vm_count
  name = "db-${count.index}-${terraform.workspace}"
