@@ -1,9 +1,9 @@
 # Network
-resource "yandex_vpc_network" "default" {
+resource "yandex_vpc_network" "network" {
   name = "net"
 }
 
-resource "yandex_vpc_subnet" "default" {
+resource "yandex_vpc_subnet" "subnet" {
   name = "subnet"
   zone           = "ru-central1-a"
   network_id     = "${yandex_vpc_network.default.id}"
