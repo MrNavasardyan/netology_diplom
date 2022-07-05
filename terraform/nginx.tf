@@ -1,5 +1,4 @@
 resource "yandex_compute_instance" "my-domain" {
- count          = var.my-domain
  name = "my-domain-${terraform.workspace}"
 
  resources {
