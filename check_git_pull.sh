@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/my_terraform_repo/terraform_my_repo
+cd /home/my_terraform_repo/diplom/netology_diplom
 
 git fetch
 
