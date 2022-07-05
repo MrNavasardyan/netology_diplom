@@ -13,7 +13,7 @@ resource "yandex_compute_instance" "my-domain" {
  }
 
    metadata = {
-   ssh-keys = "centos:${file("~/.ssh/yc_key.pub")}"
+   ssh-keys = "centos:${file("~/.ssh/id_rsa.pub")}"
  }
 
 
