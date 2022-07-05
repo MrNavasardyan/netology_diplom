@@ -30,13 +30,3 @@ variable "my_domain" {
   description = "Name for VM"
   type        = string
 }
-
-variable "public_key_path" {
-  description = "Path to ssh public key, which would be used to access workers"
-  default     = "~/.ssh/yc_key.pub"
-}
-
-variable "private_key_path" {
-  description = "Path to ssh private key, which would be used to access workers"
-  default     = "~/.ssh/yc_key"
-}

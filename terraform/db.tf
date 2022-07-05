@@ -13,10 +13,12 @@ resource "yandex_compute_instance" "db-count" {
    }
  }
 
-   metadata = {
-   ssh-keys = "centos:${file("~/.ssh/id_rsa.pub")}"
- }
-
+#    metadata = {
+#    ssh-keys = "centos:${file("~/.ssh/id_rsa.pub")}"
+#  }
+      metadata = {
+          user-data = "${file("./meta.yml")}"
+        }
 
  network_interface {
    subnet_id = yandex_vpc_subnet.subnet-count.id
