@@ -20,10 +20,10 @@ terraform {
 #     skip_credentials_validation = true
 #   }
 
-resource "yandex_storage_bucket" "test" {
+resource "yandex_storage_bucket" "state" {
   access_key = "YCAJEu1pkTKYffW707qbyKlvQ"
   secret_key = "YCNeV0p9LftLPNvjV-0PDH44thPB9OgQDFlNPp4q"
-  bucket = "my-test-bucket"
+  bucket = "tf-state-bucket-nav"
 }
 
 provider "yandex" {
