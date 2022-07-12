@@ -12,7 +12,7 @@ backend "s3" {
     bucket     = "tf-state-bucket-diplom"
     region     = "ru-central1"
     key        = "terraform.tfstate.d/stage/terraform.tfstate"
-    access_key = "ajejd937kgbjepe2o5ga"
+    access_key = "YCAJEu1pkTKYffW707qbyKlvQ"
     secret_key = "YCNeV0p9LftLPNvjV-0PDH44thPB9OgQDFlNPp4q"
 
     skip_region_validation      = true
