@@ -5,6 +5,7 @@ terraform {
       source = "yandex-cloud/yandex"
     }
   }
+  }
 
 
 # backend "s3" {
@@ -18,7 +19,7 @@ terraform {
 #     skip_region_validation      = true
 #     skip_credentials_validation = true
 #   }
-}
+
 
 provider "yandex" {
   service_account_key_file = "key.json"
