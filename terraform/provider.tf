@@ -20,6 +20,11 @@ terraform {
 #     skip_credentials_validation = true
 #   }
 
+resource "yandex_storage_bucket" "test" {
+  access_key = "YCAJEu1pkTKYffW707qbyKlvQ"
+  secret_key = "YCNeV0p9LftLPNvjV-0PDH44thPB9OgQDFlNPp4q"
+  bucket = "<имя бакета>"
+}
 
 provider "yandex" {
   service_account_key_file = "key.json"
