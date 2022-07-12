@@ -7,17 +7,17 @@ terraform {
   }
 
 
-backend "s3" {
-    endpoint   = "storage.yandexcloud.net"
-    bucket     = "tf-state-bucket-diplom"
-    region     = "ru-central1"
-    key        = "terraform.tfstate.d/stage/terraform.tfstate"
-    access_key = "YCAJEu1pkTKYffW707qbyKlvQ"
-    secret_key = "YCNeV0p9LftLPNvjV-0PDH44thPB9OgQDFlNPp4q"
+# backend "s3" {
+#     endpoint   = "storage.yandexcloud.net"
+#     bucket     = "tf-state-bucket-diplom"
+#     region     = "ru-central1"
+#     key        = "terraform.tfstate.d/stage/terraform.tfstate"
+#     access_key = "YCAJEu1pkTKYffW707qbyKlvQ"
+#     secret_key = "YCNeV0p9LftLPNvjV-0PDH44thPB9OgQDFlNPp4q"
 
-    skip_region_validation      = true
-    skip_credentials_validation = true
-  }
+#     skip_region_validation      = true
+#     skip_credentials_validation = true
+#   }
 }
 
 provider "yandex" {
