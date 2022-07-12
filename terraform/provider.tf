@@ -20,11 +20,11 @@ backend "s3" {
   }
  }
 
-resource "yandex_storage_bucket" "state" {
-  access_key = "YCAJEu1pkTKYffW707qbyKlvQ"
-  secret_key = "YCNeV0p9LftLPNvjV-0PDH44thPB9OgQDFlNPp4q"
-  bucket = "tf-state-bucket-nav"
-}
+# resource "yandex_storage_bucket" "state" {
+#   access_key = "YCAJEu1pkTKYffW707qbyKlvQ"
+#   secret_key = "YCNeV0p9LftLPNvjV-0PDH44thPB9OgQDFlNPp4q"
+#   bucket = "tf-state-bucket-nav"
+# }
 
 provider "yandex" {
   service_account_key_file = "key.json"
