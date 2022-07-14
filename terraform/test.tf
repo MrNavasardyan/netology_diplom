@@ -1,4 +1,4 @@
-resource "yandex_compute_instance" "app" {
+resource "yandex_compute_instance" "test" {
  name = "test-${terraform.workspace}"
 
  resources {
