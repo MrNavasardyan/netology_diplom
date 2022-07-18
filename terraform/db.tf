@@ -16,9 +16,7 @@ resource "yandex_compute_instance" "db-master" {
    metadata = {
    ssh-keys = "centos:${file("~/.ssh/id_rsa.pub")}"
  }
-      # metadata = {
-      #     user-data = "${file("./meta.yml")}"
-      #   }
+
 
  network_interface {
    subnet_id = yandex_vpc_subnet.mysubnet_1.id
@@ -27,7 +25,7 @@ resource "yandex_compute_instance" "db-master" {
 }
 
 resource "yandex_compute_instance" "db-slave" {
- name = "db-slave"
+ name = "db02-slave"
  hostname = "db02.${var.my_domain}"
 
  resources {

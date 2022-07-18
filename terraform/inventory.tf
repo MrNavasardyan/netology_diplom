@@ -8,6 +8,7 @@ resource "local_file" "inventory" {
     gitlab
     monitoring
     nginx
+    db
 
     [app]
     app.${var.my_domain} ansible_host=${yandex_compute_instance.app.network_interface.0.nat_ip_address}
