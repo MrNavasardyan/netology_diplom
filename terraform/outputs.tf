@@ -53,5 +53,5 @@ output "internal_ip_address_vm_instance_monitoring" {
 }
 
 output "external_ip_address_vm_instance_monitoring" {
-  value = yandex_compute_instance.monitoring.*.network_interface.0.nat_ip_address
+  value = yandex_compute_instance.monitoring.network_interface.0.nat_ip_address
 }
