@@ -8,13 +8,13 @@ resource "null_resource" "wait" {
   ]
 }
 
-resource "null_resource" "nginx" {
-  provisioner "local-exec" {
-    command = "ANSIBLE_FORCE_COLOR=1 ansible all -i ../ansible/inventory.ini -m ping"
-  }
+# resource "null_resource" "nginx" {
+#   provisioner "local-exec" {
+#     command = "ANSIBLE_FORCE_COLOR=1 ansible all -i ../ansible/inventory.ini -m ping"
+#   }
 
 
-  depends_on = [
-    null_resource.wait
-  ]
-}
+#   depends_on = [
+#     null_resource.wait
+#   ]
+# }
