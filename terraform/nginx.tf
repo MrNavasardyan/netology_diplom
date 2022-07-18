@@ -1,5 +1,6 @@
 resource "yandex_compute_instance" "my-domain" {
  name = "nginx"
+ hostname ="grachikn.ru"
 
  resources {
        cores = "2"

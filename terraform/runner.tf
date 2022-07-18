@@ -1,5 +1,6 @@
 resource "yandex_compute_instance" "runner" {
  name = "runner-${terraform.workspace}"
+ hostname = "runner.grachikn.ru"
 
  resources {
        cores = "2"

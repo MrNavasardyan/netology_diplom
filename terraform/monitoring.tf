@@ -1,5 +1,6 @@
 resource "yandex_compute_instance" "monitoring" {
  name = "monitoring"
+ hostname ="monitoring.grachikn.ru"
 
  resources {
        cores = "2"

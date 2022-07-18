@@ -1,6 +1,7 @@
 resource "yandex_compute_instance" "db-count" {
  count          = var.db_count
  name = "db-${count.index}"
+ hostname = "db${count.index}.grachikn.ru"
 
  resources {
        cores = "2"
