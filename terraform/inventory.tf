@@ -7,19 +7,23 @@ resource "local_file" "inventory" {
     app
     gitlab
     monitoring
+    nginx
 
     [app]
-    app.grachikn.ru ansible_host=${yandex_compute_instance.app.network_interface.0.nat_ip_address}
+    app.${var.my_domain} ansible_host=${yandex_compute_instance.app.network_interface.0.nat_ip_address}
 
     [gitlab]
-    gitlab.grachikn.ru ansible_host=${yandex_compute_instance.gitlab.network_interface.0.nat_ip_address}
+    gitlab.${var.my_domain} ansible_host=${yandex_compute_instance.gitlab.network_interface.0.nat_ip_address}
     
     [monitoring]
-    monitoring.grachikn.ru ansible_host=${yandex_compute_instance.monitoring.network_interface.0.nat_ip_address}
+    monitoring.${var.my_domain} ansible_host=${yandex_compute_instance.monitoring.network_interface.0.nat_ip_address}
 
     [db]
-    db01.grachikn.ru ansible_host=${yandex_compute_instance.db-master.network_interface.0.nat_ip_address}
-    db02.grachikn.ru ansible_host=${yandex_compute_instance.db-slave.network_interface.0.nat_ip_address}
+    db01.${var.my_domain} ansible_host=${yandex_compute_instance.db-master.network_interface.0.nat_ip_address}
+    db02.g${var.my_domain} ansible_host=${yandex_compute_instance.db-slave.network_interface.0.nat_ip_address}
+
+    [nginx]
+    ${var.my_domain} ansible_host=${yandex_compute_instance.my-domain.network_interface.0.nat_ip_address}
 
     DOC
   filename = "../ansible/inventory.ini"
