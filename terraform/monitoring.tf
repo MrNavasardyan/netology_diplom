@@ -1,5 +1,5 @@
 resource "yandex_compute_instance" "monitoring" {
- name = "monitoring.grachikn.ru.${terraform.workspace}"
+ name = "monitoring.grachikn.ru"
 
  resources {
        cores = "2"
