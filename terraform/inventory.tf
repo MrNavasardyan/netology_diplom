@@ -18,6 +18,10 @@ resource "local_file" "inventory" {
     [monitoring]
     monitoring.grachikn.ru ansible_host=${yandex_compute_instance.monitoring.network_interface.0.nat_ip_address}
 
+    [db]
+    db[01].grachikn.ru ansible_host=${yandex_compute_instance.db-count.01.network_interface.0.ip_address}
+    db[02].grachikn.ru ansible_host=${yandex_compute_instance.db-count.02.network_interface.0.ip_address}
+
     DOC
   filename = "../ansible/inventory.ini"
 }
