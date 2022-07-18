@@ -1,6 +1,6 @@
 resource "yandex_compute_instance" "my-domain" {
  name = "nginx"
- hostname ="grachikn.ru"
+ hostname ="${my_domain}"
 
  resources {
        cores = "2"
@@ -19,7 +19,7 @@ resource "yandex_compute_instance" "my-domain" {
 
 
  network_interface {
-   subnet_id = yandex_vpc_subnet.subnet-count.id
+   subnet_id = yandex_vpc_subnet.subnet.id
    nat       = true
  }
 }

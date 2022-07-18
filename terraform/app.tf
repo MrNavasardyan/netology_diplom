@@ -22,7 +22,7 @@ resource "yandex_compute_instance" "app" {
 
 
  network_interface {
-   subnet_id = yandex_vpc_subnet.subnet-count.id
+   subnet_id = yandex_vpc_subnet.subnet.id
    nat       = true
  }
 }

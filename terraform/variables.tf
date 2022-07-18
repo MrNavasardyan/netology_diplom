@@ -26,7 +26,7 @@ variable "db_count" {
 }
 
 variable "my_domain" {
-  default = "my_domain"
+  default = "grachikn"
   description = "Name for VM"
   type        = string
 }

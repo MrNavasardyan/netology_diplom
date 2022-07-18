@@ -3,8 +3,8 @@ resource "yandex_compute_instance" "gitlab" {
  hostname ="gitlab.grachikn.ru"
 
  resources {
-       cores = "2"
-       memory = "2"
+       cores = "4"
+       memory = "4"
  }
 
  boot_disk {
@@ -19,7 +19,7 @@ resource "yandex_compute_instance" "gitlab" {
 
 
  network_interface {
-   subnet_id = yandex_vpc_subnet.subnet-count.id
+   subnet_id = yandex_vpc_subnet.subnet.id
    nat       = true
  }
 }
