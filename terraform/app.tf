@@ -1,5 +1,5 @@
 resource "yandex_compute_instance" "app" {
- name = "app"
+ name = "app.grachikn.ru"
 
  resources {
        cores = "2"
