@@ -17,7 +17,7 @@
         "inline": [
             "sudo yum -y update",
             "sudo yum -y install bridge-utils bind-utils iptables curl net-tools tcpdump rsync telnet openssh-server",
-            "sudo yum install epel-release",
+            "sudo yum -y install epel-release",
             "sudo yum -y install python3"
         ],
         "type": "shell"
