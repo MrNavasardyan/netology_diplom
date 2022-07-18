@@ -1,5 +1,5 @@
 resource "yandex_compute_instance" "my-domain" {
- name = "my-domain-${terraform.workspace}"
+ name = "grachikn.ru-${terraform.workspace}"
 
  resources {
        cores = "2"
