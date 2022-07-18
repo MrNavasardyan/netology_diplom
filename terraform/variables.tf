@@ -9,7 +9,7 @@ variable "yandex_folder_id" {
 
 
 variable "centos-7-base" {
-  default = "fd8sgdi3n1kbkn8n5hql"
+  default = "fd8nqvct7t8a9t8c0it6"
 }
 
 
