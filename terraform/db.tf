@@ -1,6 +1,6 @@
 resource "yandex_compute_instance" "db-count" {
  count          = var.db_count
- name = "db-${count.index}-${terraform.workspace}"
+ name = "db-${count.index}.grachikn.ru.${terraform.workspace}"
 
  resources {
        cores = "2"
@@ -9,7 +9,7 @@ resource "yandex_compute_instance" "db-count" {
 
  boot_disk {
    initialize_params {
-     image_id = "fd8sgdi3n1kbkn8n5hql"
+     image_id = "fd8nqvct7t8a9t8c0it6"
    }
  }
 

@@ -8,7 +8,7 @@ resource "yandex_compute_instance" "my-domain" {
 
  boot_disk {
    initialize_params {
-     image_id = "fd8sgdi3n1kbkn8n5hql"
+     image_id = "fd8nqvct7t8a9t8c0it6"
    }
  }
 
