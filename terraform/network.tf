@@ -22,7 +22,7 @@ resource "yandex_vpc_subnet" "mysubnet_1" {
 }
 
 resource "yandex_vpc_subnet" "mysubnet_2" {
-  name           = "subnet-${terraform.workspace}"
+  name           = "subnet2-${terraform.workspace}"
   zone           = "ru-central1-b"
   network_id     = yandex_vpc_network.network.id
   v4_cidr_blocks = ["192.168.11.0/24"]
