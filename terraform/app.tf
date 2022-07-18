@@ -1,4 +1,4 @@
-resource "yandex_compute_instance" "app.grachikn.ru" {
+resource "yandex_compute_instance" "app" {
  name = "app"
 
  resources {
