@@ -19,7 +19,7 @@ variable "zone" {
 }
 
 variable "my_domain" {
-  default = "grachikn"
+  default = "grachikn.ru"
   description = "Name for VM"
   type        = string
 }

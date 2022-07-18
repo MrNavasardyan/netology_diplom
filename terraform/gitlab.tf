@@ -1,6 +1,6 @@
 resource "yandex_compute_instance" "gitlab" {
  name = "gitlab"
- hostname ="gitlab.${my_domain}"
+ hostname ="gitlab.${var.my_domain}"
 
  resources {
        cores = "4"

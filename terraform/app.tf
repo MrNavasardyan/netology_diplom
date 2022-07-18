@@ -1,6 +1,6 @@
 resource "yandex_compute_instance" "app" {
  name = "app"
- hostname = "app.${my_domain}"
+ hostname = "app.${var.my_domain}"
 
  resources {
        cores = "2"
