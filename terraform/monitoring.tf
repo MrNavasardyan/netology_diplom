@@ -1,6 +1,6 @@
 resource "yandex_compute_instance" "monitoring" {
  name = "monitoring"
- hostname ="monitoring.grachikn.ru"
+ hostname ="monitoring.${my_domain}"
 
  resources {
        cores = "2"
@@ -19,7 +19,7 @@ resource "yandex_compute_instance" "monitoring" {
 
 
  network_interface {
-   subnet_id = yandex_vpc_subnet.subnet-count.id
+   subnet_id = yandex_vpc_subnet.mysubnet_1.id
    nat       = true
  }
 }

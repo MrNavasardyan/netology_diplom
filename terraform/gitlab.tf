@@ -1,6 +1,6 @@
 resource "yandex_compute_instance" "gitlab" {
  name = "gitlab"
- hostname ="gitlab.grachikn.ru"
+ hostname ="gitlab.${my_domain}"
 
  resources {
        cores = "4"
@@ -19,7 +19,7 @@ resource "yandex_compute_instance" "gitlab" {
 
 
  network_interface {
-   subnet_id = yandex_vpc_subnet.subnet.id
+   subnet_id = yandex_vpc_subnet.mysubnet_1.id
    nat       = true
  }
 }
