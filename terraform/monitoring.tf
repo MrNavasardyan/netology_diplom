@@ -1,5 +1,5 @@
 resource "yandex_compute_instance" "monitoring" {
- name = "monitoring-${terraform.workspace}"
+ name = "monitoring.grachikn.ru.${terraform.workspace}"
 
  resources {
        cores = "2"
@@ -8,7 +8,7 @@ resource "yandex_compute_instance" "monitoring" {
 
  boot_disk {
    initialize_params {
-     image_id = "fd8sgdi3n1kbkn8n5hql"
+     image_id = "fd8nqvct7t8a9t8c0it6"
    }
  }
 
