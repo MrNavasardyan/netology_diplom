@@ -18,13 +18,6 @@ variable "zone" {
   default     = "ru-central1-a"
 }
 
-
-variable "db_count" {
-  description = "Number of Virtual DB Machines"
-  default     = 2
-  type        = string
-}
-
 variable "my_domain" {
   default = "grachikn"
   description = "Name for VM"

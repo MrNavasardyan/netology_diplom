@@ -1,6 +1,6 @@
 resource "yandex_compute_instance" "db-master" {
  name = "db01-master"
- hostname = "db01.grachikn.ru"
+ hostname = "db01.${my_domain}"
 
  resources {
        cores = "2"
@@ -21,14 +21,14 @@ resource "yandex_compute_instance" "db-master" {
       #   }
 
  network_interface {
-   subnet_id = yandex_vpc_subnet.subnet-count.id
+   subnet_id = yandex_vpc_subnet.mysubnet_1.id
    nat       = true
  }
 }
 
 resource "yandex_compute_instance" "db-slave" {
  name = "db-slave"
- hostname = "db02.grachikn.ru"
+ hostname = "db02.${my_domain}"
 
  resources {
        cores = "2"
@@ -49,7 +49,7 @@ resource "yandex_compute_instance" "db-slave" {
       #   }
 
  network_interface {
-   subnet_id = yandex_vpc_subnet.subnet.id
+   subnet_id = yandex_vpc_subnet.mysubnet_1.id
    nat       = true
  }
 }

@@ -1,6 +1,6 @@
 resource "yandex_compute_instance" "app" {
  name = "app"
- hostname = "app.grachikn.ru"
+ hostname = "app.${my_domain}"
 
  resources {
        cores = "2"
@@ -22,7 +22,7 @@ resource "yandex_compute_instance" "app" {
 
 
  network_interface {
-   subnet_id = yandex_vpc_subnet.subnet.id
+   subnet_id = yandex_vpc_subnet.mysubnet_1.id
    nat       = true
  }
 }

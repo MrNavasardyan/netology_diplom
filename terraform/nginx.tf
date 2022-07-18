@@ -19,7 +19,7 @@ resource "yandex_compute_instance" "my-domain" {
 
 
  network_interface {
-   subnet_id = yandex_vpc_subnet.subnet.id
+   subnet_id = yandex_vpc_subnet.mysubnet_1.id
    nat       = true
  }
 }
