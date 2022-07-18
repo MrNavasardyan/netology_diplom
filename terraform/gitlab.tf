@@ -1,5 +1,5 @@
 resource "yandex_compute_instance" "gitlab" {
- name = "gitlab.grachikn.ru"
+ name = "gitlab"
 
  resources {
        cores = "2"
