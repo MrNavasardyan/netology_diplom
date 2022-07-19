@@ -13,8 +13,8 @@ resource "null_resource" "ping" {
     command = "ANSIBLE_FORCE_COLOR=1 ansible -m ping -i ../ansible/inventory.ini nodes -u centos"
   }
 
-    depends_on = [
-    local_file.inventory
+  depends_on = [
+    null_resource.wait
   ]
 }
 
@@ -24,6 +24,6 @@ resource "null_resource" "nginx" {
   }
 
   depends_on = [
-    null_resource.inventory
+    null_resource.ping
   ]
 }
