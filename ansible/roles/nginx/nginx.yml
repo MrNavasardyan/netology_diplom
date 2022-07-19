@@ -16,6 +16,15 @@
         yum:
             name=nginx
             state=latest
+            
+      - name: copy nginx config file
+        copy: src=files/nginx.conf dest=/etc/nginx/sites-available/default
+
+      - name: enable config
+        file: >
+          dest=/etc/nginx/sites-enabled/default
+          src=/etc/nginx/sites-available/default
+          state=link
 
       - name: restart nginx
         service: name=nginx state=restarted
