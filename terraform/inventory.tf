@@ -21,7 +21,7 @@ resource "local_file" "inventory" {
 
     [db]
     db01.${var.my_domain} ansible_host=${yandex_compute_instance.db-master.network_interface.0.nat_ip_address}
-    db02.g${var.my_domain} ansible_host=${yandex_compute_instance.db-slave.network_interface.0.nat_ip_address}
+    db02.${var.my_domain} ansible_host=${yandex_compute_instance.db-slave.network_interface.0.nat_ip_address}
 
     [nginx]
     ${var.my_domain} ansible_host=${yandex_compute_instance.my-domain.network_interface.0.nat_ip_address}
