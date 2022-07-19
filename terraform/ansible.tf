@@ -14,7 +14,7 @@ resource "null_resource" "ping" {
   }
 
     depends_on = [
-    local_file.wait
+    local_file.inventory
   ]
 }
 
@@ -24,6 +24,6 @@ resource "null_resource" "nginx" {
   }
 
   depends_on = [
-    null_resource.ping
+    null_resource.inventory
   ]
 }
