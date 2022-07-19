@@ -17,8 +17,8 @@
             name=nginx
             state=latest
 
-      - name: copy nginx config file
-        copy: src=files/nginx.conf dest=/etc/nginx/sites-available/default
+      # - name: copy nginx config file
+      #   copy: src=files/nginx.conf dest=/etc/nginx/
 
       - name: enable config
         file: >
