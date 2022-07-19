@@ -26,7 +26,6 @@ resource "yandex_dns_zone" "zone1" {
 
   zone             = "grachikn.ru."
   public           = true
-  private_networks = [yandex_vpc_network.network.id]
 }
 
 resource "yandex_dns_recordset" "rs1" {
