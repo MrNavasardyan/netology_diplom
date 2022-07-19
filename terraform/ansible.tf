@@ -6,7 +6,7 @@ resource "null_resource" "wait" {
   depends_on = [
     local_file.inventory
   ]
-
+}
 
 
 
@@ -24,5 +24,4 @@ resource "null_resource" "nginx" {
   depends_on = [
     null_resource.wait
   ]
-}
 }
