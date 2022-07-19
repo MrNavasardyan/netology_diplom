@@ -6,7 +6,7 @@ resource "null_resource" "wait" {
   depends_on = [
     local_file.inventory
   ]
-}
+
 
 
 
@@ -18,10 +18,11 @@ resource "null_resource" "ping" {
 
 resource "null_resource" "nginx" {
   provisioner "local-exec" {
-    command = "ANSIBLE_FORCE_COLOR=1 ansible-playbook -i ../ansible/inventory.ini nginx -u centos"
+    command = "ANSIBLE_FORCE_COLOR=1 ansible-playbook ./ansible/nginx.yml -u centos"
   }
 
   depends_on = [
     null_resource.wait
   ]
+}
 }

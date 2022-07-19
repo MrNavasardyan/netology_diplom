@@ -1,7 +1,7 @@
 #!/usr/bin/env ansible-playbook
 ---
   - name: Configure webserver nginx
-    hosts: nodes
+    hosts: nginx
     become: yes
     become_user: root
     remote_user: centos
@@ -16,7 +16,7 @@
         yum:
             name=nginx
             state=latest
-            
+
       - name: copy nginx config file
         copy: src=files/nginx.conf dest=/etc/nginx/sites-available/default
 
