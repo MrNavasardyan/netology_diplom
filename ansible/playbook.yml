@@ -5,7 +5,7 @@
       - name: Ping nodes
         ping:
     roles:
-      - mysql
+      # - mysql
       - wordpress
       - nginx
 
