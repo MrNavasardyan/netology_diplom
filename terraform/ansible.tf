@@ -8,7 +8,7 @@ resource "null_resource" "wait" {
   ]
 }
 
-resource "null_resource" "ping" {
+resource "null_resource" "ansible" {
   provisioner "local-exec" {
     command = "ANSIBLE_FORCE_COLOR=1 ansible-playbook ../ansible/playbook.yml -u centos"
   }
