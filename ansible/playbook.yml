@@ -6,7 +6,7 @@
         ping:
     roles:
       - mysql
-      - wordpres
+      - wordpress
 
   # - name: Install MySQL
   #   hosts: db
