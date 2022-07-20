@@ -1,0 +1,9 @@
+---
+  - name: Installing alertmanager
+    hosts: monitoring
+    become: yes
+    become_user: root
+    remote_user: centos
+    vars:
+      ansible_python_interpreter: /usr/bin/python
+    tasks:

@@ -1,8 +1,24 @@
 ---
-  - name: Ping hosts
+  - name: Check connetcions
     hosts: nodes
+    tasks: 
     
-    tasks:
+      - name: Ping nodes
+        ping:
 
-    - name: Ping 
-      ping:
+  # - name: Deploy NGINX and Letsencrypt
+  #   hosts: nginx
+    
+  #   roles:
+  #      - nginx
+  #      - letsencrypt
+
+  # - name: Install wordpress
+  #   hosts: app
+  #   roles:
+  #      - wordpress
+
+  - name: Install MySQL
+    hosts: db
+    roles:
+       - mysql
