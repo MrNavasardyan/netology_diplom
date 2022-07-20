@@ -1,32 +1,39 @@
+# ---
+#   - name: Check connetcions
+#     hosts: nodes
+#     tasks:     
+#       - name: Ping nodes
+#         ping:
+#     roles:
+#       # - mysql
+#       - wordpress
+#       - nginx
+
+
 ---
-  - name: Check connetcions
-    hosts: nodes
-    tasks:     
-      - name: Ping nodes
-        ping:
-    roles:
-      # - mysql
-      - wordpress
-      - nginx
+- hosts: 
+      nginx
+      app
+  become:
+    true
+  become_method:
+    su
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+   - nginx
 
-  # - name: Install MySQL
-  #   hosts: db
-  #   roles:
-  #      - mysql
-
-  # - name: Install wordpress
-  #   hosts: app
-  #   roles:
-  #      - wordpress
-
-
-  # - name: Deploy NGINX and Letsencrypt
-  #   hosts: nginx
-    
-  #   roles:
-  #      - nginx
-  #      - letsencrypt
-
-
-
+- hosts: wordpress
+  become:
+    true
+  become_method:
+    sudo
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+   - wordpress
 
