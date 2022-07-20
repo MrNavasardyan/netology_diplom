@@ -1,7 +1,9 @@
 #!/usr/bin/env ansible-playbook
 ---
   - name: Configure webserver nginx
-    hosts: nginx
+    hosts: 
+          nginx
+          app
     become: yes
     become_user: root
     remote_user: centos
