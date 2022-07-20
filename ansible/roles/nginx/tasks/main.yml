@@ -1,4 +1,9 @@
 ---
+- name: Install EPEL Repo
+  yum:
+    name=epel-release
+    state=present
+    
 - name: Install Nginx Web Server on RedHat Family
   yum:
     name=nginx
