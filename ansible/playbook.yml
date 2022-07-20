@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
   - name: Check connetcions
     hosts: nodes
@@ -27,6 +28,44 @@
   #      - nginx
   #      - letsencrypt
 
+=======
+# ---
+#   - name: Check connetcions
+#     hosts: nodes
+#     tasks:     
+#       - name: Ping nodes
+#         ping:
+#     roles:
+#       # - mysql
+#       - wordpress
+#       - nginx
+>>>>>>> 719a227501380155c67c4037cf6bdaf585bc18ad
 
 
+---
+- hosts: 
+      nginx
+      app
+  become:
+    true
+  become_method:
+    su
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+   - nginx
+
+- hosts: wordpress
+  become:
+    true
+  become_method:
+    sudo
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+   - wordpress
 
