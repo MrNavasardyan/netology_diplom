@@ -1,22 +1,12 @@
 ---
-  - name: Configure webserver nginx
-    hosts: 
-          nginx
-          app
-    become: yes
-    become_user: root
-    remote_user: centos
-    vars:
-      ansible_python_interpreter: /usr/bin/python
-    tasks:
-      - name: install EPEL repo
-        become: yes
-        yum: name=epel-release state=present
-
-      - name: Install Nginx Web Server on RedHat Family
-        yum:
-            name=nginx
-            state=latest
+- name: Install Nginx Web Server on RedHat Family
+  yum:
+    name=nginx
+    state=latest
+  when:
+    ansible_os_family == "RedHat"
+  notify:
+    - nginx systemd
 
       # - name: copy nginx config file
       #   copy: src=files/nginx.conf dest=/etc/nginx/
@@ -26,9 +16,3 @@
       #     dest=/etc/nginx/sites-enabled/default
       #     src=/etc/nginx/sites-available/default
       #     state=link
-
-      - name: restart nginx
-        service: name=nginx state=restarted
-
-
-

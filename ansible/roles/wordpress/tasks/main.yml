@@ -1,11 +1,2 @@
 ---
-- name: Create webroot
-  file:
-    state: directory
-    path: /srv/www/
-    owner: root
-    group: root
-    mode: 0755
-  become: yes
-  hosts: db
 

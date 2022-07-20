@@ -11,17 +11,17 @@
   remote_user:
     centos
   roles:
-   - nginx
+     - nginx
 
-- hosts: wordpress
-  become:
-    true
-  become_method:
-    sudo
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-   - wordpress
+# - hosts: wordpress
+#   become:
+#     true
+#   become_method:
+#     sudo
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#    - wordpress
 
