@@ -7,6 +7,7 @@
     group: root
     mode: 0755
   become: yes
+  hosts: db
 
 - name: Check if WordPress directory exists in /srv/www
   stat: path=/srv/www/{{server_hostname}}
