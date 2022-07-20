@@ -1,10 +1,21 @@
 ---
   - name: Check connetcions
     hosts: nodes
-    tasks: 
-    
+    tasks:     
       - name: Ping nodes
         ping:
+
+
+  - name: Install MySQL
+    hosts: db
+    roles:
+       - mysql
+
+  - name: Install wordpress
+    hosts: app
+    roles:
+       - wordpress
+
 
   # - name: Deploy NGINX and Letsencrypt
   #   hosts: nginx
@@ -13,12 +24,6 @@
   #      - nginx
   #      - letsencrypt
 
-  # - name: Install wordpress
-  #   hosts: app
-  #   roles:
-  #      - wordpress
 
-  - name: Install MySQL
-    hosts: db
-    roles:
-       - mysql
+
+
