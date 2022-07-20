@@ -4,11 +4,13 @@
     become: true
     become_user: root
     remote_user: centos
-    yum:
-      name: "{{ item }}"
+    tasks:
+      - yum:
+        name: "{{ item }}"
     with_items:
-      - mysql-server
-      - python-mysqldb
+        - mysql-server
+        - python-mysqldb
+    
     vars:
       ansible_python_interpreter: /usr/bin/python
     
