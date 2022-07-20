@@ -9,17 +9,17 @@
   become: yes
   hosts: db
 
-  - name: Check if WordPress directory exists in /srv/www
-    stat: path=/srv/www/{{server_hostname}}
-    register: check_path
+    - name: Check if WordPress directory exists in /srv/www
+      stat: path=/srv/www/{{server_hostname}}
+      register: check_path
 
-  - name: Download WordPress
-    get_url: 
-      url: https://wordpress.org/wordpress-{{ wp_version }}.tar.gz 
-      dest: /tmp/wordpress-{{ wp_version }}.tar.gz 
-      checksum: "sha1:{{ wp_sha1sum }}" 
-    become: yes
-    when: not check_path.stat.exists
+    - name: Download WordPress
+      get_url: 
+        url: https://wordpress.org/wordpress-{{ wp_version }}.tar.gz 
+        dest: /tmp/wordpress-{{ wp_version }}.tar.gz 
+        checksum: "sha1:{{ wp_sha1sum }}" 
+      become: yes
+      when: not check_path.stat.exists
 
   - name: Extract WordPress
     unarchive:
