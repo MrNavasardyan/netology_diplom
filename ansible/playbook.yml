@@ -6,7 +6,7 @@
         ping:
     roles:
       # - mysql
-      - wordpress
+      #- wordpress
       - nginx
 
   # - name: Install MySQL
