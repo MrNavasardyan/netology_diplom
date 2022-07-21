@@ -20,20 +20,10 @@ resource "null_resource" "ping" {
 
 resource "null_resource" "ansible" {
   provisioner "local-exec" {
-    command = "ANSIBLE_FORCE_COLOR=1 ansible-playbook ../ansible/playbook.yml -u centos"
+    command = "ANSIBLE_FORCE_COLOR=1 ansible-playbook ../ansible/playbook.yml"
   }
 
   depends_on = [
     null_resource.ping
   ]
 }
-
-# resource "null_resource" "nginx" {
-#   provisioner "local-exec" {
-#     command = "ANSIBLE_FORCE_COLOR=1 ansible-playbook ../ansible/roles/nginx/nginx.yml -u centos"
-#   }
-
-#   depends_on = [
-#     null_resource.ping
-#   ]
-# }
