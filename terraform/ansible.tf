@@ -8,13 +8,23 @@ resource "null_resource" "wait" {
   ]
 }
 
+resource "null_resource" "ping" {
+  provisioner "local-exec" {
+    command = "ANSIBLE_FORCE_COLOR=1 ansible -m ping -u centos"
+  }
+
+  depends_on = [
+    null_resource.wait
+  ]
+}
+
 resource "null_resource" "ansible" {
   provisioner "local-exec" {
     command = "ANSIBLE_FORCE_COLOR=1 ansible-playbook ../ansible/playbook.yml -u centos"
   }
 
   depends_on = [
-    null_resource.wait
+    null_resource.ping
   ]
 }
 
