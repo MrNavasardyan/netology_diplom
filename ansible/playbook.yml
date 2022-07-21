@@ -1,7 +1,6 @@
 ---
 - hosts: 
-      nginx
-      app
+      proxy
   become:
     true
   become_user:
@@ -11,13 +10,13 @@
   roles:
      - nginx
 
-- hosts: nodes
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-   - nodeexport
+# - hosts: nodes
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#    - nodeexport
 
