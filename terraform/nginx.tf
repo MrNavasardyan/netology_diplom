@@ -1,5 +1,5 @@
 resource "yandex_compute_instance" "my-domain" {
- name = "nginx"
+ name = "proxy"
  hostname ="${var.my_domain}"
 
  resources {
