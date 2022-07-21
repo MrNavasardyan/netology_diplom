@@ -11,15 +11,13 @@
   roles:
      - nginx
 
-# - hosts: wordpress
-#   become:
-#     true
-#   become_method:
-#     sudo
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#    - wordpress
+- hosts: nodes
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+   - nodeexport
 
