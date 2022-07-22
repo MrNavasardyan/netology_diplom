@@ -18,10 +18,16 @@
     - git
     - libpython-dev
     - zlib1g-dev
+- name: Apply Nginx template
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf    
+
 - name: Lets Encrypt client
   git: dest=/opt/certbot clone=yes repo=https://github.com/certbot/certbot force=yes
 # Auto-renew certificates and reload nginx
 - name: Add crontab to renew certificates
   cron: minute="30" hour="2" weekday="1" job="/opt/certbot/certbot-auto renew >> /var/log/le-renew.log"
+  
 - name: Add crontab to reload server
   cron: minute="35" hour="2" weekday="1" job="/etc/init.d/nginx reload"
