@@ -1,33 +1,32 @@
----
-- name: Update apt cache
-  yum: update_cache=yes cache_valid_time=86400
-- name: Install depends
-  yum: name={{ item }} state=latest
-  with_items:
-    - python
-    - python-dev
-    - gcc
-    - dialog
-    - libaugeas0
-    - augeas-lenses
-    - libssl-dev
-    - libffi-dev
-    - ca-certificates
-    - python-pip
-    - python-virtualenv
-    - git
-    - libpython-dev
-    - zlib1g-dev
-- name: Apply Nginx template
-  template:
-    src: templates/nginx.conf.j2
-    dest: /etc/nginx/nginx.conf    
+    - name: install letsencrypt
+      yum: name=letsencrypt state=latest
 
-- name: Lets Encrypt client
-  git: dest=/opt/certbot clone=yes repo=https://github.com/certbot/certbot force=yes
-# Auto-renew certificates and reload nginx
-- name: Add crontab to renew certificates
-  cron: minute="30" hour="2" weekday="1" job="/opt/certbot/certbot-auto renew >> /var/log/le-renew.log"
-  
-- name: Add crontab to reload server
-  cron: minute="35" hour="2" weekday="1" job="/etc/init.d/nginx reload"
+    - name: create letsencrypt directory
+      file: name=/var/www/letsencrypt state=directory
+
+    - name: Install system nginx config
+      template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+
+    - name: Reload nginx to activate letsencrypt site
+      service: name=nginx state=restarted
+
+    - name: Create letsencrypt certificate
+      shell: letsencrypt certonly -n --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }}
+      args:
+        creates: /etc/letsencrypt/live/{{ domain_name }}
+
+    - name: Generate dhparams
+      shell: openssl dhparam -out /etc/nginx/dhparams.pem 2048
+      args:
+        creates: /etc/nginx/dhparams.pem
+
+    - name: Reload nginx to activate specified site
+      service: name=nginx state=restarted
+
+    - name: Add letsencrypt cronjob for cert renewal
+      cron:
+        name: letsencrypt_renewal
+        special_time: weekly
+        job: letsencrypt --renew certonly -n --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} && service nginx reload
