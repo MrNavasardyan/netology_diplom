@@ -10,7 +10,7 @@ resource "null_resource" "wait" {
 
 resource "null_resource" "ping" {
   provisioner "local-exec" {
-    command = "ANSIBLE_FORCE_COLOR=1 ansible nodes -m ping -u centos"
+    command = "ANSIBLE_FORCE_COLOR=1 ansible all -m ping -u centos"
   }
 
   depends_on = [
