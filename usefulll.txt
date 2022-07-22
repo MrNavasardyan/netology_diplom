@@ -5,3 +5,5 @@ ansible all -m setup
 {{ hostvars['app.grachikn.ru']['ansible_default_ipv4']['address'] }} - вытащить внутр ip 
 
 ansible-inventory -i ../ansible/inventory.ini --list -посмотреть все hostvars, можно дернуть паблик ip
+
+ssh-keygen -R 192.168.225

@@ -10,7 +10,8 @@
   tasks:
    - name: set sebook
      shell: 'setsebool -P httpd_can_network_connect 1'
-
+   - name: install nano
+     yum: name=letsencrypt state=latest
 - hosts: 
       proxy
   vars:
