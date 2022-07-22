@@ -13,13 +13,13 @@
   notify:
     - nginx systemd
 
-- name: copy nginx config file
-  copy: src=files/nginx.conf dest=/etc/nginx/
+# - name: copy nginx config file
+#   copy: src=files/nginx.conf dest=/etc/nginx/
 
-# - name: Apply Nginx template
-#   template:
-#     src: templates/nginx.conf.j2
-#     dest: /etc/nginx/nginx.conf
+- name: Apply Nginx template
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
 
 - name: Test for running nginx
   shell: ps axuf|grep 'nginx'|grep -v "grep" | tr -d "\n" | cat
