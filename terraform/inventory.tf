@@ -6,7 +6,7 @@ resource "local_file" "inventory" {
     
 
     [app]
-    app.${var.my_domain} ansible_host=${yandex_compute_instance.app.network_interface.0.nat_ip_address} letsencrypt_email=ngrachik2011@gmail.com domain_name=grachikn.ru
+    app.${var.my_domain} ansible_host=${yandex_compute_instance.app.network_interface.0.nat_ip_address}
 
     [gitlab]
     gitlab.${var.my_domain} ansible_host=${yandex_compute_instance.gitlab.network_interface.0.nat_ip_address}
