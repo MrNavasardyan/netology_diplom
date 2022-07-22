@@ -1,6 +1,12 @@
 ---
 - hosts: all
   gather_facts: true
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
   tasks:
    - name: set sebook
      shell: 'setsebool -P httpd_can_network_connect 1'
