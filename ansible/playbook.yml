@@ -12,8 +12,15 @@
      shell: 'setsebool -P httpd_can_network_connect 1'
    - name: install nano
      yum: name=letsencrypt state=latest
+
 - hosts: 
       proxy
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
   vars:
     domain_name: www.grachikn.ru
     letsencrypt_email: ngrachik2011@gmail.com
@@ -23,5 +30,11 @@
 
 - hosts: 
       app
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
   roles:
      - nginx
