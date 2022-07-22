@@ -15,7 +15,7 @@ http {
         server_name grachikn.ru;
         location / {
             #Здесь нужно указать IP адрес сервера
-            proxy_pass {{ hostvars[app]['app.grachikn.ru'] }}:8080;
+            proxy_pass {{ hostvars[app]['ansible_facts']['ansible_all_ipv4_addresses'] }}:8080;
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Real-IP $remote_addr;
