@@ -1,0 +1,5 @@
+---
+
+- include_tasks: nginx-letsencrypt.yml
+  when: letsencrypt_certificates is defined
+  tags: letsencrypt
