@@ -7,8 +7,6 @@
     root
   remote_user:
     centos
-  vars:
-    server_name: "{{ ansible_default_ipv4.address }}"
   roles:
      - nginx
 
