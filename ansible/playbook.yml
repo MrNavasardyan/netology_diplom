@@ -1,7 +1,10 @@
 ---
 - hosts: all
   gather_facts: true
-  
+  tasks:
+   - name: set sebook
+     shell: 'setsebool -P httpd_can_network_connect 1'
+
 - hosts: 
       proxy
   become:
@@ -23,15 +26,3 @@
     centos
   roles:
      - nginx
-
-
-# - hosts: nodes
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#    - nodeexport
-
