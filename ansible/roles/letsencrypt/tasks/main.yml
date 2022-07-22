@@ -9,10 +9,10 @@
         src: templates/nginx.conf.j2
         dest: /etc/nginx/nginx.conf
 
-    - name: Install nginx site for letsencrypt requests
-      template:
-         src: templates/nginx-http.j2
-         dest: /etc/nginx/default.d/nginx-http.conf
+    # - name: Install nginx site for letsencrypt requests
+    #   template:
+    #      src: templates/nginx-http.j2
+    #      dest: /etc/nginx/default.d/nginx-http.conf
 
     - name: Reload nginx to activate letsencrypt site
       service: name=nginx state=restarted
