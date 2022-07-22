@@ -1,0 +1,115 @@
+worker_processes 1;
+    events {
+    worker_connections 1024;
+}
+http {
+    include mime.types;
+    default_type application/octet-stream;
+    sendfile on;
+    keepalive_timeout 65;
+
+    #APP
+    server {
+        listen 80;
+        server_name grachikn.ru www.grachikn.ru;
+        location / {
+            proxy_pass http://{{ hostvars['app.grachikn.ru']['ansible_default_ipv4']['address'] }}:8080;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+        location ~ /.well-known {
+            allow all;
+          }
+        
+        include /etc/nginx/default.d/*.conf;
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+            root html;
+        }
+    }
+    server {
+        listen 443 ssl;
+        server_name grachikn.ru www.grachikn.ru;
+        root {{ service_root_directory }}/{{ service_name }};
+        
+        index index.html;
+        ssl_certificate {{ letsencrypt_ssl_dir }}/{{ service_host }}/fullchain.pem;
+        ssl_certificate_key {{ letsencrypt_ssl_dir }}/{{ service_host }}/privkey.pem;
+        
+          location / {
+      try_files $uri $uri/ /index.html;
+  }
+    #GITLAB
+    server {
+        listen 80;
+        server_name gitlab.grachikn.ru ;
+        #Redirect to HTTPS
+        location / {
+            proxy_pass http://{{ hostvars['gitlab.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+            root html;
+        }
+    }
+
+    #GRAFANA 3
+    server {
+        listen 80;
+        server_name grafana.grachikn.ru ;
+        #Redirect to HTTPS
+        location / {
+            proxy_pass http://{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+            root html;
+        }
+    }
+
+    #PROMETHEUS 4
+    server {
+        listen 80;
+        server_name prometheus.grachikn.ru ;
+
+        location / {
+     
+            proxy_pass http://{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+            root html;
+        }
+    }
+
+    #ALERTMANAGER 5
+    server {
+        listen 80;
+
+        server_name prometheus.grachikn.ru ;
+
+        location / {
+
+            proxy_pass http://{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+            root html;
+        }
+    }
+
+
+}
