@@ -11,10 +11,8 @@ http {
     #APP
     server {
         listen 80;
-        #Здесь нужно указать домен
         server_name grachikn.ru www.grachikn.ru;
         location / {
-            #Здесь нужно указать IP адрес сервера
             proxy_pass http://{{ hostvars['app.grachikn.ru']['ansible_default_ipv4']['address'] }}:8080;
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -29,11 +27,9 @@ http {
     #GITLAB
     server {
         listen 80;
-        #Здесь нужно указать домен
         server_name gitlab.grachikn.ru ;
         #Redirect to HTTPS
         location / {
-            #Здесь нужно указать IP адрес сервера
             proxy_pass http://{{ hostvars['gitlab.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -48,11 +44,9 @@ http {
     #GRAFANA 3
     server {
         listen 80;
-        #Здесь нужно указать домен
         server_name grafana.grachikn.ru ;
         #Redirect to HTTPS
         location / {
-            #Здесь нужно указать IP адрес сервера
             proxy_pass http://{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -67,9 +61,8 @@ http {
     #PROMETHEUS 4
     server {
         listen 80;
-        #Здесь нужно указать домен
         server_name prometheus.grachikn.ru ;
-        #Redirect to HTTPS
+
         location / {
             #Здесь нужно указать IP адрес сервера
             proxy_pass http://{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
@@ -86,9 +79,9 @@ http {
     #ALERTMANAGER 5
     server {
         listen 80;
-        #Здесь нужно указать домен
+
         server_name prometheus.grachikn.ru ;
-        #Redirect to HTTPS
+
         location / {
             #Здесь нужно указать IP адрес сервера
             proxy_pass http://{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
