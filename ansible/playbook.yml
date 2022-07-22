@@ -9,6 +9,19 @@
     centos
   roles:
      - nginx-proxy
+
+- hosts: 
+      app
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+     - nginx
+
+
 # - hosts: nodes
 #   become:
 #     true
