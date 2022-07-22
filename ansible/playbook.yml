@@ -19,6 +19,9 @@
     root
   remote_user:
     centos
+  vars:
+    domain_name:
+    - grachikn.ru
   roles:
     - nginx-proxy
     - letsencrypt
