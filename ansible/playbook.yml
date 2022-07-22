@@ -8,11 +8,7 @@
   remote_user:
     centos
   roles:
-     - role: julienpalard.nginx_letsencrypt
-       vars:
-         letsencrypt_certificates: [[grachikn.ru, www.grachikn.ru, grafana.grachikn.ru]]
-         letsencrypt_email: ngrachik2011@gmail.com
-
+     - nginx-proxy
 # - hosts: nodes
 #   become:
 #     true
