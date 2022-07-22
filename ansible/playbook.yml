@@ -20,7 +20,7 @@
   remote_user:
     centos
   vars:
-    domain_name: grachikn.ru
+    domain_name: www.grachikn.ru
     letsencrypt_email: ngrachik2011@gmail.com
   roles:
     - nginx-proxy
