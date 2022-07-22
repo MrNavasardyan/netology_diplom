@@ -8,13 +8,11 @@
   remote_user:
     centos
   tasks:
-   - name: set sebook
-     shell: 'setsebool -P httpd_can_network_connect 1'
    - name: install nano
      yum: name=nano state=latest
 
 - hosts: 
-      proxy
+    proxy
   become:
     true
   become_user:
