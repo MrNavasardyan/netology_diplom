@@ -8,17 +8,18 @@
       template:
         src: templates/nginx.conf.j2
         dest: /etc/nginx/nginx.conf
-        
+
     - name: Install nginx site for letsencrypt requests
       template:
          src: templates/nginx-http.j2
-         dest: /etc/nginx/default.d/
+         dest: /etc/nginx/default.d/nginx-http.conf
 
     - name: Reload nginx to activate letsencrypt site
       service: name=nginx state=restarted
 
     - name: Create letsencrypt certificate
-      shell: letsencrypt certonly -n --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }}
+      shell: letsencrypt certonly -n --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} --server https://acme-staging-v02.api.letsencrypt.org/directory
+
       args:
         creates: /etc/letsencrypt/live/{{ domain_name }}
 
@@ -30,7 +31,7 @@
     - name: Install nginx site for specified site
       template:
         src: templates/nginx-le.j2
-        dest: /etc/nginx/default.d/
+        dest: /etc/nginx/default.d/nginx-le.conf
 
     - name: Reload nginx to activate specified site
       service: name=nginx state=restarted
