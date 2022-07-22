@@ -1,2 +1,7 @@
 ansible all -m setup
-#setsebool -P httpd_can_network_connect 1
+
+#setsebool -P httpd_can_network_connect 1 (для nginx)
+
+{{ hostvars['app.grachikn.ru']['ansible_default_ipv4']['address'] }} - вытащить внутр ip 
+
+ansible-inventory -i ../ansible/inventory.ini --list -посмотреть все hostvars, можно дернуть паблик ip
