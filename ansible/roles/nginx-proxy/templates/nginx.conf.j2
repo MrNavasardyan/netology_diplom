@@ -8,14 +8,14 @@ http {
     sendfile on;
     keepalive_timeout 65;
 
-    #Server 1
+    #APP
     server {
         listen 80;
         #Здесь нужно указать домен
         server_name grachikn.ru www.grachikn.ru;
         location / {
             #Здесь нужно указать IP адрес сервера
-            proxy_pass http://{{ hostvars['app.grachikn.ru']['ansible_all_ipv4_addresses'] }}:8080;
+            proxy_pass http://{{ hostvars['app.grachikn.ru']['ansible_default_ipv4'] }}:8080;
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Real-IP $remote_addr;
@@ -26,7 +26,7 @@ http {
         }
     }
 
-    #Server 2
+    #GITLAB
     server {
         listen 80;
         #Здесь нужно указать домен
@@ -45,108 +45,62 @@ http {
         }
     }
 
-    #Server 3
+    #GRAFANA 3
+    server {
+        listen 80;
+        #Здесь нужно указать домен
+        server_name grafana.grachikn.ru ;
+        #Redirect to HTTPS
+        location / {
+            #Здесь нужно указать IP адрес сервера
+            proxy_pass http://{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+            root html;
+        }
+    }
 
+    #PROMETHEUS 4
+    server {
+        listen 80;
+        #Здесь нужно указать домен
+        server_name prometheus.grachikn.ru ;
+        #Redirect to HTTPS
+        location / {
+            #Здесь нужно указать IP адрес сервера
+            proxy_pass http://{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+            root html;
+        }
+    }
+
+    #ALERTMANAGER 5
+    server {
+        listen 80;
+        #Здесь нужно указать домен
+        server_name prometheus.grachikn.ru ;
+        #Redirect to HTTPS
+        location / {
+            #Здесь нужно указать IP адрес сервера
+            proxy_pass http://{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+            root html;
+        }
+    }
 
 
 }
-
-
-# events {}
-# http {
-#     server {
-#         listen       80;
-#         listen       [::]:80;
-#         server_name  www.grachikn.ru grachikn.ru;
-
-#         error_page 404 /404.html;
-#         location = /404.html {
-#         }
-
-#         error_page 500 502 503 504 /50x.html;
-#         location = /50x.html {
-#         }
-#     }
-
-#     upstream app {
-#           server app.grachikn.ru;
-#     }
-
-
-#     server {
-#         listen       80;
-#         listen       [::]:80;
-#         server_name www.grachikn.ru grachikn.ru;
-        
-
-#         location / {
-#               proxy_pass http://app.grachikn.ru:;
-#         }
-#     }
-
-#     # upstream gitlab {
-#     #       server gitlab.grachikn.ru;
-#     # }
-
-
-#     # server {
-#     #     listen       80;
-#     #     listen       [::]:80;
-#     #     server_name www.gitlab.grachikn.ru gitlab.grachikn.ru;
-        
-
-#     #     location / {
-#     #           proxy_pass http://gitlab.grachikn.ru;
-#     #     }
-#     # }
-#     # upstream grafana {
-#     #       server monitoring.grachikn.ru;
-#     # }
-
-
-#     # server {
-#     #     listen       80;
-#     #     listen       [::]:80;
-#     #     server_name www.grafana.grachikn.ru grafana.grachikn.ru;
-        
-
-#     #     location / {
-#     #           proxy_pass http://monitoring.grachikn.ru:port;
-#     #     }
-#     # }
-
-#     # upstream prometheus {
-#     #       server monitoring.grachikn.ru;
-#     # }
-
-
-#     # server {
-#     #     listen       80;
-#     #     listen       [::]:80;
-#     #     server_name www.prometheus.grachikn.ru prometheus.grachikn.ru;
-        
-
-#     #     location / {
-#     #           proxy_pass http://monitoring.grachikn.ru:port;
-#     #     }
-#     # }
-
-#     # upstream alertmanager {
-#     #       server monitoring.grachikn.ru;
-#     # }
-
-
-#     # server {
-#     #     listen       80;
-#     #     listen       [::]:80;
-#     #     server_name www.alertmanager.grachikn.ru alertmanager.grachikn.ru;
-        
-
-#     #     location / {
-#     #           proxy_pass http://monitoring.grachikn.ru:port;
-#     #     }
-#     # }
-
-    
-
-#     }
