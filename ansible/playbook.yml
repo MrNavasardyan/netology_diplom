@@ -8,15 +8,7 @@
   remote_user:
     centos
   roles:
-<<<<<<< HEAD
-     - role: julienpalard.nginx_letsencrypt
-       vars:
-         letsencrypt_certificates: [[grachikn.ru, www.grachikn.ru]]
-         letsencrypt_email: ngrachik2011@gmail.com
-
-=======
      - nginx-proxy
->>>>>>> 4257173c98c057a6a3980d04fcc5dafa9f7c7236
 # - hosts: nodes
 #   become:
 #     true
