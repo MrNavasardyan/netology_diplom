@@ -19,7 +19,7 @@
 - name: Apply Nginx template
   template:
     src: templates/nginx.conf.j2
-    dest: /etc/nginx/
+    dest: /etc/nginx/nginx.conf
 
 - name: Test for running nginx
   shell: ps axuf|grep 'nginx'|grep -v "grep" | tr -d "\n" | cat
