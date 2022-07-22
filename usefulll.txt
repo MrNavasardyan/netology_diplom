@@ -1,4 +1,4 @@
-ansible all -m setup
+ansible all -m setup - просмотр всех фактов
 
 #setsebool -P httpd_can_network_connect 1 (для nginx)
 
@@ -6,6 +6,6 @@ ansible all -m setup
 
 ansible-inventory -i ../ansible/inventory.ini --list -посмотреть все hostvars, можно дернуть паблик ip
 
-ssh-keygen -R 192.168.225
+ssh-keygen -R 51.250.77.179
 
 https://bl.ocks.org/nicgirault/67913430bc52727e6fbc70d230028a37 - letsencrypt
