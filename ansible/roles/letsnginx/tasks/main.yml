@@ -10,6 +10,9 @@
     - name: create letsencrypt directory
       file: name=/var/www/letsencrypt state=directory
 
+    - name: Changing perm of "var/www/letsencrypt", adding "+x"
+      file: dest=/var/www/letsencrypt mode=a+x
+
     - name: create sites-enabled directory
       file: name=/etc/nginx/sites-enabled/ state=directory
 
