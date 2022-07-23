@@ -10,9 +10,9 @@
       state=present
 
 - name: Install certbot-nginx plugin
-  yum:
-     name=python2-certbot-nginx
-     state=present
+  shell: >
+     yum install certbot python2-certbot-nginx
 
-- import_tasks: certificate.yml
-  when: domain_name is defined
+- name: "Generate new certificate if one doesn't exist"
+  shell: >
+          certbot certonly --force-renewal --nginx --email '{{ letsencrypt_email }}' --agree-tos -d '{{ domain_name }}' --server https://acme-staging-v02.api.letsencrypt.org/directory
