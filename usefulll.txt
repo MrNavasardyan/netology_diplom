@@ -9,3 +9,5 @@ ansible-inventory -i ../ansible/inventory.ini --list -посмотреть вс�
 ssh-keygen -R 51.250.77.179
 
 https://bl.ocks.org/nicgirault/67913430bc52727e6fbc70d230028a37 - letsencrypt
+
+ ansible-galaxy init alertmanager - создать структуру роли
