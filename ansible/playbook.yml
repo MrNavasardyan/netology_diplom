@@ -60,3 +60,4 @@
   roles:
    - prometheus
    - alertmanager
+   - grafana
