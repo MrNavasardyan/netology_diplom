@@ -49,7 +49,12 @@
     dest=/etc/systemd/system/
   notify:
     - systemd reload
- 
+
+- name: Apply Prometheus template
+  template:
+    src: prometheus.yaml.j2
+    dest: /etc/prometheus/prometheus.yml
+
 - name: Systemctl Prometheus Start
   systemd:
     name: prometheus
