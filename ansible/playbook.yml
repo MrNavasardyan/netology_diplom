@@ -1,15 +1,15 @@
 ---
-- hosts: all
-  gather_facts: true
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  tasks:
-   - name: install nano
-     yum: name=nano state=latest
+# - hosts: all
+#   gather_facts: true
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   tasks:
+#    - name: install nano
+#      yum: name=nano state=latest
 
 - hosts: 
     proxy
