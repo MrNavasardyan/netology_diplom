@@ -10,16 +10,17 @@
 #   tasks:
 #    - name: install nano
 #      yum: name=nano state=latest
-- hosts: 
-      all
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-     - node-exporter
+
+# - hosts: 
+#       all
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#      - node-exporter
 
 - hosts: 
     proxy
@@ -49,15 +50,15 @@
 
 
   
-- hosts: 
-    monitoring
-  become:
-   true
-  become_user:
-   root
-  remote_user:
-    centos
-  roles:
-   - prometheus
-   - alertmanager
-   - grafana
+# - hosts: 
+#     monitoring
+#   become:
+#    true
+#   become_user:
+#    root
+#   remote_user:
+#     centos
+#   roles:
+#    - prometheus
+#    - alertmanager
+#    - grafana
