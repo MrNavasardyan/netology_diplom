@@ -8,15 +8,15 @@ resource "null_resource" "wait" {
   ]
 }
 
-# resource "null_resource" "ping" {
-#   provisioner "local-exec" {
-#     command = "ANSIBLE_FORCE_COLOR=1 ansible all -m ping -u centos"
-#   }
+resource "null_resource" "ping" {
+  provisioner "local-exec" {
+    command = "ANSIBLE_FORCE_COLOR=1 ansible all -m ping -u centos"
+  }
 
-#   depends_on = [
-#     null_resource.wait
-#   ]
-# }
+  depends_on = [
+    null_resource.wait
+  ]
+}
 
 resource "null_resource" "ansible" {
   provisioner "local-exec" {
@@ -24,6 +24,6 @@ resource "null_resource" "ansible" {
   }
 
   depends_on = [
-    null_resource.wait
+    null_resource.ping
   ]
 }
