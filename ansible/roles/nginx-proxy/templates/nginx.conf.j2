@@ -29,7 +29,7 @@ http {
     #GITLAB
     server {
         listen 80;
-        server_name gitlab.grachikn.ru ;
+        server_name gitlab.grachikn.ru www.gitlab.grachikn.ru;
         #Redirect to HTTPS
         location / {
             proxy_pass http://{{ hostvars['gitlab.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
@@ -46,7 +46,7 @@ http {
     #GRAFANA 3
     server {
         listen 80;
-        server_name grafana.grachikn.ru ;
+        server_name grafana.grachikn.ru www.grafana.grachikn.ru;
         #Redirect to HTTPS
         location / {
             proxy_pass http://{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
@@ -63,7 +63,7 @@ http {
     #PROMETHEUS 4
     server {
         listen 80;
-        server_name prometheus.grachikn.ru ;
+        server_name prometheus.grachikn.ru www.prometheus.grachikn.ru;
 
         location / {
      
@@ -82,7 +82,7 @@ http {
     server {
         listen 80;
 
-        server_name prometheus.grachikn.ru ;
+        server_name alertmanager.grachikn.ru www.alertmanager.grachikn.ru;
 
         location / {
 
