@@ -18,9 +18,9 @@
  
 - name: Download And Unzipped Prometheus
   unarchive:
-    src: https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-amd64.tar.gz
+    src: https://github.com/prometheus/prometheus/releases/download/v{{ prom_version }}/prometheus-{{ prom_version }}.linux-amd64.tar.gz
     dest: /tmp/prometheus
-    creates: /tmp/prometheus/prometheus-{{ prometheus_version }}.linux-amd64
+    creates: /tmp/prometheus/prometheus-{{ prom_version }}.linux-amd64
     remote_src: yes
  
 - name: Copy Bin Files From Unzipped to Prometheus
