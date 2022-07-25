@@ -1,2 +1,13 @@
 ---
 # tasks file for grafana
+- name: Install Grafana Web Server on RedHat Family
+  yum:
+    name=grafana
+    state=latest
+
+- name: Systemctl Grafana Start
+  systemd:
+    name: grafana
+    state: started
+    enabled: yes
+
