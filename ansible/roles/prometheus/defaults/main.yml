@@ -15,5 +15,5 @@ prometheus_var_config:
     - job_name: prometheus
       scrape_interval: 5m
       static_configs:
-        - targets: ['{{ inventory_hostname }}:9090']
+        - targets: ['app.grachikn.ru:9090','db01.grachikn.ru:9090','db02.grachikn.ru:9090','grachikn.ru:9090']
 # defaults file for roles/prometheus

@@ -39,3 +39,25 @@
     centos
   roles:
      - nginx
+
+- hosts: 
+      all
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+     - node-exporter
+  
+- hosts: 
+    monitoring
+  become:
+   true
+  become_user:
+   root
+  remote_user:
+    centos
+  roles:
+   - prometheus
