@@ -25,7 +25,7 @@
  
 - name: Copy Bin Files From Unzipped to Prometheus
   copy:
-    src: /tmp/prometheus/prometheus-{{ prometheus_version }}.linux-amd64/{{ item }}
+    src: /tmp/prometheus/prometheus-{{ prom_version }}.linux-amd64/{{ item }}
     dest: /usr/local/bin/
     remote_src: yes
     mode: preserve
@@ -35,7 +35,7 @@
  
 - name: Copy Conf Files From Unzipped to Prometheus
   copy:
-    src: /tmp/prometheus/prometheus-{{ prometheus_version }}.linux-amd64/{{ item }}
+    src: /tmp/prometheus/prometheus-{{ prom_version }}.linux-amd64/{{ item }}
     dest: /etc/prometheus/
     remote_src: yes
     mode: preserve
