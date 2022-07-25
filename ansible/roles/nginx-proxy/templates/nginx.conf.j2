@@ -56,7 +56,7 @@ http {
         server_name grafana.grachikn.ru www.grafana.grachikn.ru;
         #Redirect to HTTPS
         location / {
-            proxy_pass http://{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:9090;
+            proxy_pass http://{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Real-IP $remote_addr;
