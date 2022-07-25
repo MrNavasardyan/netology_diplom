@@ -3,7 +3,7 @@
   yum:
     name=epel-release
     state=present
-    
+ 
 - name: Install Nginx Web Server on RedHat Family
   yum:
     name=nginx
@@ -12,9 +12,6 @@
     ansible_os_family == "RedHat"
   notify:
     - nginx systemd
-
-# - name: copy nginx config file
-#   copy: src=files/nginx.conf dest=/etc/nginx/
 
 - name: Apply Nginx template
   template:
