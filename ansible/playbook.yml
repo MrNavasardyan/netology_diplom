@@ -10,6 +10,16 @@
 #   tasks:
 #    - name: install nano
 #      yum: name=nano state=latest
+- hosts: 
+      all
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+     - node-exporter
 
 - hosts: 
     proxy
@@ -19,9 +29,6 @@
     root
   remote_user:
     centos
-  vars:
-    domain_name: www.grachikn.ru
-    letsencrypt_email: ngrachik2011@gmail.com
   roles:
     # 
     # - letsencrypt
@@ -40,16 +47,7 @@
   roles:
      - nginx
 
-- hosts: 
-      all
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-     - node-exporter
+
   
 - hosts: 
     monitoring
