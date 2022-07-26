@@ -6,7 +6,7 @@ ansible all -m setup - просмотр всех фактов
 
 ansible-inventory -i ../ansible/inventory.ini --list -посмотреть все hostvars, можно дернуть паблик ip
 
-ssh-keygen -R 51.250.77.179
+ssh-keygen -R 51.250.94.224
 
 https://bl.ocks.org/nicgirault/67913430bc52727e6fbc70d230028a37 - letsencrypt
 
