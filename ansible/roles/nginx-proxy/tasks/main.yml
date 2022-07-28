@@ -17,25 +17,9 @@
   template:
     src: templates/nginx.conf.j2
     dest: /etc/nginx/nginx.conf
-
-- name: Test for running nginx
-  shell: ps axuf|grep 'nginx'|grep -v "grep" | tr -d "\n" | cat
-  register: test_running_nginx
-  changed_when: False
-  tags: restart-nginx
-   
-- name: First check the configuration
-  shell: /usr/sbin/nginx -t
-  register: test_nginx_config
-  when: test_running_nginx.stdout != ""
-  changed_when: False
-  ignore_errors: True
-  tags: restart-nginx
            
-- name: Restart nginx
-  service: name=nginx state=restarted
-  when: test_running_nginx.stdout != "" and test_nginx_config.rc == 0
-  tags: restart-nginx
+- name: Nginx reload
+  shell: service nginx restart
 
 - name: set sebook
   shell: 'setsebool -P httpd_can_network_connect 1'
