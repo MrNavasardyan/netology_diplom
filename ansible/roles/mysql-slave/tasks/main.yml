@@ -1,2 +1,15 @@
 ---
 # tasks file for mysql-slave
+- name: install mariadb
+  yum: name={{ item }} state=present
+  with_items:
+  - mariadb
+  - mariadb-server
+- name: install conf
+  copy: src=my.cnf dest=/etc/my.cnf
+- name: start mariadb
+  service: name=mariadb state=started enabled=yes
+- name: command
+  command: mysql -e "change master to master_host='db01.grachikn.ru',master_user='backuper',master_password='backuper',master_log_file='master_bin.000001',master_log_pos=30364;"
+- name: command
+  command: mysql -e "start slave;"

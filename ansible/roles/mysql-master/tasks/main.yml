@@ -1,2 +1,16 @@
 ---
 # tasks file for mysql-master
+
+- name: install mariadb
+  yum: name={{ item }} state=present
+  with_items:
+  - mariadb
+  - mariadb-server
+- name: install conf
+  copy: src=my.cnf dest=/etc/my.cnf
+- name: start mariadb
+  service: name=mariadb state=started enabled=yes
+- name: mysql
+  command: mysql -e "create database wordpress;grant all on wordpress.* to wordpress@'db01.grachikn.ru' identified by '123456';"
+- name: command
+  command: mysql -e "grant replication slave,replication client on *.* to 'backuper'@'db01.grachikn.ru' identified by 'backuper';"

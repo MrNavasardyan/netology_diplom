@@ -9,28 +9,34 @@
     centos
 
 - hosts: 
-      app
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
+      db
   roles:
-     - nginx
+       - mysql-master
+       - mysql-slave
 
-
-# - hosts: all
-#   gather_facts: true
+# - hosts: 
+#       app
 #   become:
 #     true
 #   become_user:
 #     root
 #   remote_user:
 #     centos
-#   tasks:
-#    - name: install nano
-#      yum: name=nano state=latest
+#   roles:
+#      - nginx
+
+# - hosts: 
+#     proxy
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#     - nginx-proxy
+#     - letsencrypt
+
 
 # - hosts: 
 #       all
@@ -43,21 +49,17 @@
 #   roles:
 #      - node-exporter
 
-- hosts: 
-    proxy
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-    - nginx-proxy
-    - letsencrypt
-    #  - letsnginx
-     
-     
-
+# - hosts: all
+#   gather_facts: true
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   tasks:
+#    - name: install nano
+#      yum: name=nano state=latest
 
 # - hosts: 
 #     monitoring
