@@ -1,0 +1,6 @@
+- name: Enable snapd.socket
+  ansible.builtin.systemd:
+      name: snapd.socket
+      enabled: True
+
+
