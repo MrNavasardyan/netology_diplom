@@ -1,5 +1,7 @@
     - name: Install snapd
       yum: name=snapd state=latest
+    
+    - name: enable snapd
       notify: snapd.socket
 
     - name: Create symbolic link
@@ -8,21 +10,26 @@
            dest: /snap
            state: link
 
+    - name: Ensure that your version of snapd is up to date
+      shell: sudo snap install core; sudo snap refresh core
+
     - name: Install certbot
-      ansible.builtin.shell:
-           cmd: sudo snap install --classic certbot
+      shell: sudo snap install --classic certbot
 
     - name: Create symbolic link
-      file: 
-           src: /snap/bin/certbot
-           dest: /usr/bin/certbot
-           state: link
+      shell: sudo ln -s /var/lib/snapd/snap /snap
+
+    # - name: Create symbolic link
+    #   file: 
+    #        src: /snap/bin/certbot
+    #        dest: /usr/bin/certbot
+    #        state: link
     
     - name: Install certbot
-      ansible.builtin.shell:
-           cmd: sudo certbot --nginx -n -d www.grachikn.ru -m ngrachik@mail.ru --redirect
+      shell: sudo certbot --nginx -n -d www.grachikn.ru -m ngrachik@mail.ru --redirect
 
-    - name: Reload nginx
-      ansible.builtin.shell:
-           cmd: service nginx reload
+    - name: Restart nginx
+      service: name=nginx state=restarted
+      when: test_running_nginx.stdout != "" and test_nginx_config.rc == 0
+      tags: restart-nginx
       
