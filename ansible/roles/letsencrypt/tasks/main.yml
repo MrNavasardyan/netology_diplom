@@ -20,16 +20,12 @@
     - name: Create symbolic link
       shell: sudo ln -s /var/lib/snapd/snap /snap
 
-    - name: Install certbot
-      shell: sudo snap install --classic certbot
-
-    # - name: Create symbolic link
-    #   file: 
-    #        src: /snap/bin/certbot
-    #        dest: /usr/bin/certbot
-    #        state: link
+    - name: Install certbot snap with option --classic
+      community.general.snap:
+            name: certbot
+            classic: yes
     
-    - name: Install certbot
+    - name: Install cert
       shell: sudo certbot --nginx --dry-run -n -d www.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
 
     - name: Nginx reload
