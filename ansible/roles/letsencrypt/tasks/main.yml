@@ -35,5 +35,5 @@
     #   shell: sudo certbot --nginx --dry-run -n -d www.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
 
     - name: Nginx reload
-      shell: nginx -s reload
+      shell: service nginx reload
       
