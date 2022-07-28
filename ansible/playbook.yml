@@ -17,7 +17,7 @@
   remote_user:
     centos
   roles:
-       - mysql-master
+      #  - mysql-master
        - mysql-slave
 
 # - hosts: 
