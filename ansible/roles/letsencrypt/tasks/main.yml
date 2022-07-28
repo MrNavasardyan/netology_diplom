@@ -1,21 +1,27 @@
+    - name: Install EPEL Repo
+      yum:
+        name=epel-release
+        state=present
+
     - name: Install snapd
       yum: name=snapd state=latest
-      notify: snapd.socket
     
-    - name: Create symbolic link
-      file: 
-           src: /var/lib/snapd/snap
-           dest: /snap
-           state: link
+    - name: Enable systemd
+      shell: systemctl enable --now snapd.socket
+    
+    # - name: Create symbolic link
+    #   file: 
+    #        src: /var/lib/snapd/snap
+    #        dest: /snap
+    #        state: link
 
-    - name: Ensure that your version of snapd is up to date
-      shell: sudo snap install core; sudo snap refresh core
+    # - name: Ensure that your version of snapd is up to date
+    #   shell: sudo snap install core; sudo snap refresh core
+    - name: Create symbolic link
+      shell: sudo ln -s /var/lib/snapd/snap /snap
 
     - name: Install certbot
       shell: sudo snap install --classic certbot
-
-    - name: Create symbolic link
-      shell: sudo ln -s /var/lib/snapd/snap /snap
 
     # - name: Create symbolic link
     #   file: 
@@ -24,10 +30,8 @@
     #        state: link
     
     - name: Install certbot
-      shell: sudo certbot --nginx -n -d www.grachikn.ru -m ngrachik@mail.ru --redirect
+      shell: sudo certbot --nginx --dry-run -n -d www.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
 
-    - name: Restart nginx
-      service: name=nginx state=restarted
-      when: test_running_nginx.stdout != "" and test_nginx_config.rc == 0
-      tags: restart-nginx
+    - name: Nginx reload
+      shell: nginx -s reload
       
