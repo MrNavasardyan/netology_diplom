@@ -12,12 +12,12 @@
     - name: Create symbolic link
       shell: sudo ln -s /var/lib/snapd/snap /snap
 
-    - name: Install certbot snap with option --classic
-      shell: sudo snap install --classic certbot
-
     - name: Do not count this as a failure
       ansible.builtin.command: /bin/false
       ignore_errors: yes
+
+    - name: Install certbot snap with option --classic
+      shell: sudo snap install --classic certbot
    
     - name: Pause for 1 minutes 
       ansible.builtin.pause:
