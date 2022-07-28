@@ -25,9 +25,4 @@
     - name: Reload nginx
       ansible.builtin.shell:
            cmd: service nginx reload
-    
-
-
-    - name: create letsencrypt directory
-      file: name=/var/www/letsencrypt state=directory
       
