@@ -9,24 +9,20 @@
     - name: Enable systemd
       shell: systemctl enable --now snapd.socket
     
-    # - name: Create symbolic link
-    #   file: 
-    #        src: /var/lib/snapd/snap
-    #        dest: /snap
-    #        state: link
-
-    # - name: Ensure that your version of snapd is up to date
-    #   shell: sudo snap install core; sudo snap refresh core
     - name: Create symbolic link
       shell: sudo ln -s /var/lib/snapd/snap /snap
+
+    - name: Pause for 1 minutes to build app cache
+      ansible.builtin.pause:
+      minutes: 1
 
     - name: Install certbot snap with option --classic
       community.general.snap:
             name: certbot
             classic: yes
     
-    - name: Install cert
-      shell: sudo certbot --nginx --dry-run -n -d www.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
+    # - name: Install cert
+    #   shell: sudo certbot --nginx --dry-run -n -d www.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
 
     - name: Nginx reload
       shell: nginx -s reload
