@@ -14,7 +14,7 @@
 
     - name: Install certbot snap with option --classic
       shell: sudo snap install --classic certbot
-      ignore_errors: yes
+      ignore_errors: True
    
     - name: Pause for 1 minutes 
       ansible.builtin.pause:
