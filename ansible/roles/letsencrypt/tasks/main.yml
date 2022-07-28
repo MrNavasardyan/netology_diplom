@@ -12,7 +12,7 @@
     - name: Create symbolic link
       shell: sudo ln -s /var/lib/snapd/snap /snap
 
-    - name: Pause for 1 minutes to build app cache
+    - name: Pause for 1 minutes 
       ansible.builtin.pause:
       minutes: 1
 
