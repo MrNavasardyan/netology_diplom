@@ -7,9 +7,30 @@
     root
   remote_user:
     centos
-  tasks:
-   - name: install nano
-     yum: name=nano state=latest
+
+- hosts: 
+      app
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+     - nginx
+
+
+# - hosts: all
+#   gather_facts: true
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   tasks:
+#    - name: install nano
+#      yum: name=nano state=latest
 
 # - hosts: 
 #       all
@@ -24,7 +45,6 @@
 
 - hosts: 
     proxy
-  gather_facts: true
   become:
     true
   become_user:
@@ -32,22 +52,11 @@
   remote_user:
     centos
   roles:
-    # 
-    # - letsencrypt
-     - nginx-proxy
+    - nginx-proxy
+    - letsencrypt
     #  - letsnginx
      
      
-- hosts: 
-      app
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-     - nginx
 
 
 # - hosts: 

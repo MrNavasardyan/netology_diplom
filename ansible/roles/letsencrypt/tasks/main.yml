@@ -1,43 +1,33 @@
-    - name: install letsencrypt
-      yum: name=letsencrypt state=latest
+    - name: Install snapd
+      yum: name=snapd state=latest
+      notify: snapd.socket
+
+    - name: Create symbolic link
+      file: 
+           src: /var/lib/snapd/snap
+           dest: /snap
+           state: link
+
+    - name: Install certbot
+      ansible.builtin.shell:
+           cmd: sudo snap install --classic certbot
+
+    - name: Create symbolic link
+      file: 
+           src: /snap/bin/certbot
+           dest: /usr/bin/certbot
+           state: link
+    
+    - name: Install certbot
+      ansible.builtin.shell:
+           cmd: sudo certbot --nginx -n -d www.grachikn.ru -m ngrachik@mail.ru --redirect
+
+    - name: Reload nginx
+      ansible.builtin.shell:
+           cmd: service nginx reload
+    
+
 
     - name: create letsencrypt directory
       file: name=/var/www/letsencrypt state=directory
-
-    - name: Install system nginx config
-      template:
-        src: templates/nginx.conf.j2
-        dest: /etc/nginx/nginx.conf
-
-    # - name: Install nginx site for letsencrypt requests
-    #   template:
-    #      src: templates/nginx-http.j2
-    #      dest: /etc/nginx/default.d/nginx-http.conf
-
-    - name: Reload nginx to activate letsencrypt site
-      service: name=nginx state=restarted
-
-    - name: Create letsencrypt certificate
-      shell: letsencrypt certonly -n --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} --server https://acme-staging-v02.api.letsencrypt.org/directory
-
-      args:
-        creates: /etc/letsencrypt/live/{{ domain_name }}
-
-    - name: Generate dhparams
-      shell: openssl dhparam -out /etc/nginx/dhparams.pem 2048
-      args:
-        creates: /etc/nginx/dhparams.pem
-
-    - name: Install nginx site for specified site
-      template:
-        src: templates/nginx-le.j2
-        dest: /etc/nginx/default.d/nginx-le.conf
-
-    - name: Reload nginx to activate specified site
-      service: name=nginx state=restarted
-
-    - name: Add letsencrypt cronjob for cert renewal
-      cron:
-        name: letsencrypt_renewal
-        special_time: weekly
-        job: letsencrypt --renew certonly -n --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} && service nginx reload
+      
