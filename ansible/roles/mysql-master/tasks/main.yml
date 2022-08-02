@@ -50,9 +50,9 @@
     daemon_reload: yes
     name: mysqld
 
-- name: Create user replica
-  shell: >
-     mysql -uroot -e "CREATE USER 'replica'@'{{ db2 }}' IDENTIFIED BY 'replica';"
+# - name: Create user replica
+#   shell: >
+#      mysql -uroot -e "CREATE USER 'replica'@'{{ db2 }}' IDENTIFIED BY 'replica';"
 
 - name: Grant previllegies
   shell: >
