@@ -15,7 +15,6 @@
 
 - name: Check version
   command: mysql -uroot -e 'SELECT version();'
-  register: mysqlversion
 
 - name: start mariadb
   service: name=mariadb state=started enabled=yes
