@@ -31,8 +31,8 @@
   service: name=mysqld state=started enabled=yes
 
 - name: Check version
-  command:
-       commands: mysql -uroot -e 'SELECT version();'
+  shell: >
+   mysql -uroot -e 'SELECT version();'
        register: version
 
 - name: PRINT OUT THE OUTPUT VARIABLE
