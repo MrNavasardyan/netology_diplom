@@ -1,0 +1,66 @@
+wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+rpm -ivh mysql-community-release-el7-5.noarch.rpm
+
+yum update
+
+yum install mysql-server
+
+systemctl start mysqld
+
+mysql -uroot -e 'SELECT version();'
+
+--master--
+
+sudo nano /etc/my.cnf
+master:/etc/my.cnf
+bind-address           = 192.168.121.59 (localhost)
+server-id              = 1
+log_bin                = mysql-bin
+
+sudo systemctl restart mysqld
+
+mysql -uroot -e CREATE USER 'replica'@'192.168.121.14' IDENTIFIED BY 'replica';
+
+
+
+GRANT REPLICATION SLAVE ON *.* TO 'replica'@'192.168.121.14';
+
+
+===========================
+  tasks:
+    - name: execute Arista eos command
+      eos_command:
+        commands:
+          - mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $1}'
+          - mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $2}'
+      register: output  
+
+        var: output.stdout_lines
+
+	output.stdout_lines[0] mysql-bin.000001
+    output.stdout_lines[1] 285
+
+      
+
+
+mysql -uroot -e "CREATE DATABASE replicatest;"
+
+mysql -uroot -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'wordpress';"
+mysql -uroot -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'worpress'@'localhost';
+
+--slave--
+
+sudo nano /etc/my.cnf
+slave:/etc/my.cnf
+bind-address           = 192.168.121.14 (localhost)
+server-id              = 2
+log_bin                = mysql-bin
+
+sudo systemctl restart mysqld
+
+mysql -uroot -e "STOP SLAVE;"
+
+
+mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='192.168.121.59', MASTER_USER='replica', MASTER_PASSWORD='strong_password', MASTER_LOG_FILE='awk '{print $1}'', MASTER_LOG_POS=$awk'{print $2}';"
+
+mysql -uroot -e "START SLAVE;"
