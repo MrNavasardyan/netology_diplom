@@ -27,8 +27,8 @@
     name=mysql-server
     state=latest
 
-- name: start mariadb
-  service: name=mariadb state=started enabled=yes
+- name: start mysqld
+  service: name=mysqld state=started enabled=yes
 
 - name: Check version
   command: mysql -uroot -e 'SELECT version();'
