@@ -35,7 +35,7 @@
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
-       var: version
+       var: version.stdout_lines[1]
        
 - name: Apply config
   template:
@@ -52,6 +52,6 @@
   shell: >
      mysql -uroot -e "STOP SLAVE;"
 
-- name: Exec cmd Stop slave
+- name: Exec CHANGE MASTER TO MASTER_HOST
   shell: >
-     mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ db1 }}', MASTER_USER='replica', MASTER_PASSWORD='strong_password', MASTER_LOG_FILE='{{ var1 }}', MASTER_LOG_POS={{ var2 }};"
+     mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ db1 }}', MASTER_USER='replica', MASTER_PASSWORD='strong_password', MASTER_LOG_FILE='{{ var1.stdout_lines[0] }}', MASTER_LOG_POS={{ var2.stdout_lines[0] }};"
