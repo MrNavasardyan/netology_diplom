@@ -7,9 +7,7 @@
     root
   remote_user:
     centos
-  vars:
-    var1:
-    var2:
+
 
 - hosts: 
       db_master
