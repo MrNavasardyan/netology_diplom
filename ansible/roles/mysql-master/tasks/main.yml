@@ -68,7 +68,8 @@
        var: var1.stdout_lines[0]
 
 - name: set_fact
-  set_fact: my_var1="{{ var1.stdout_lines[0] }}"  
+  set_fact: my_var1="{{ var1.stdout_lines[0] }}" 
+  delegate_to: "{{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}" 
       
 - name: Get var2
   shell: > 
@@ -80,7 +81,10 @@
        var: var2.stdout_lines[0]
 
 - name: set_fact
-  set_fact: my_var2="{{ var2.stdout_lines[0] }}"         
+  set_fact: my_var2="{{ var2.stdout_lines[0] }}"
+  delegate_to: "{{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}"
+  
+             
 
 - name: Create database WORDPRESS
   shell: >
