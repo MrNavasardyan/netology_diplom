@@ -1,5 +1,9 @@
 ---
 # tasks file for mysql-master
+- name: Install wget
+  yum:
+    name=wget
+    state=latest 
 
 - name: wget MySQL
   shell: wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm && rpm -ivh mysql-community-release-el7-5.noarch.rpm
