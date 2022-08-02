@@ -27,11 +27,11 @@
     name=mysql-server
     state=latest
 
-- name: Check version
-  command: mysql -uroot -e 'SELECT version();'
-
 - name: start mariadb
   service: name=mariadb state=started enabled=yes
+
+- name: Check version
+  command: mysql -uroot -e 'SELECT version();'
 
 - name: Apply config
   template:
@@ -45,4 +45,4 @@
     name: mysqld
 
 - name: Create user replica
-  command: mysql -uroot -e CREATE USER 'replica'@'{{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}' IDENTIFIED BY 'replica';
+  command: mysql -uroot -e CREATE USER 'replica'@'{{ db2 }}' IDENTIFIED BY 'replica';
