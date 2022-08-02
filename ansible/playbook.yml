@@ -22,7 +22,7 @@
        - mysql-master
   
 - hosts: 
-      db-slave
+      db_slave
   become:
     true
   become_user:
