@@ -14,9 +14,10 @@
   ansible.builtin.get_url:
     url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
     dest: /home/mysql
-
-- name: wget MySQL
-  shell: rpm -ivh /home/mysql/mysql-community-release-el7-5.noarch.rpm
+   
+- name: rpm MySQL
+  command: rpm -ivh /home/mysql/mysql-community-release-el7-5.noarch.rpm
+  ignore_errors: True
 
 - name: Install updates
   yum: name=* state=latest
