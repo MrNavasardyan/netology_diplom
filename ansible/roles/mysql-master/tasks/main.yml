@@ -31,7 +31,8 @@
   service: name=mysqld state=started enabled=yes
 
 - name: Check version
-  command: mysql -uroot -e 'SELECT version();'
+  shell: > 
+       mysql -uroot -e 'SELECT version();'
 
 - name: Apply config
   template:
@@ -45,5 +46,5 @@
     name: mysqld
 
 - name: Create user replica
-  shell: 
-     - mysql -uroot -e CREATE USER 'replica'@'{{ db2 }}' IDENTIFIED BY 'replica';
+  shell: >
+     mysql -uroot -e CREATE USER 'replica'@'{{ db2 }}' IDENTIFIED BY 'replica';
