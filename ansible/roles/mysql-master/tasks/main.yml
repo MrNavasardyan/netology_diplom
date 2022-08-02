@@ -37,7 +37,7 @@
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
-       var: version
+       var: version.stdout_lines[0]
        
 - name: Apply config
   template:
@@ -59,14 +59,22 @@
      mysql -uroot -e "GRANT REPLICATION SLAVE ON *.* TO 'replica'@'{{ db2 }}';"
 
 - name: Get var1
-  ansible.builtin.shell: > 
+  shell: > 
       mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $1}'
   register: var1
 
+- name: PRINT OUT THE OUTPUT VARIABLE
+  debug:
+       var: var1.stdout_lines[0]
+
 - name: Get var2
-  ansible.builtin.shell: > 
+  shell: > 
       mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $2}'
   register: var2
+
+- name: PRINT OUT THE OUTPUT VARIABLE
+  debug:
+       var: var2.stdout_lines[0]
 
 - name: Create database WORDPRESS
   shell: >
@@ -78,6 +86,6 @@
 
 - name: Grant previllegies
   shell: >
-     GRANT ALL PRIVILEGES ON wordpress.* TO 'worpress'@'localhost';
+     mysql -uroot -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'worpress'@'localhost';"
  
      
