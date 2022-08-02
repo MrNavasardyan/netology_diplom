@@ -45,4 +45,4 @@
     name: mysqld
 
 - name: Create user replica
-  command: mysql -uroot -e CREATE USER 'replica'@'{{ db2 }}' IDENTIFIED BY 'replica';
+  shell: mysql -uroot -e CREATE USER 'replica'@'{{ db2 }}' IDENTIFIED BY 'replica';
