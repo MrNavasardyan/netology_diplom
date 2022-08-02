@@ -37,7 +37,7 @@
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
-       var: version.stdout_lines[0][1]
+       var: version.stdout_lines[1]
        
 - name: Apply config
   template:
@@ -80,9 +80,9 @@
 #   shell: >
 #      mysql -uroot -e "CREATE DATABASE wordpress;"
 
-- name: Create user replica
-  shell: >
-     mysql -uroot -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'replica';"     
+# - name: Create user replica
+#   shell: >
+#      mysql -uroot -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'replica';"     
 
 - name: Grant previllegies
   shell: >
