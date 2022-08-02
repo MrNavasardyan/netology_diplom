@@ -37,7 +37,7 @@
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
-       var: version.stdout_lines[0]
+       var: version.stdout_lines[0][1]
        
 - name: Apply config
   template:
@@ -76,9 +76,9 @@
   debug:
        var: var2.stdout_lines[0]
 
-- name: Create database WORDPRESS
-  shell: >
-     mysql -uroot -e "CREATE DATABASE wordpress;"
+# - name: Create database WORDPRESS
+#   shell: >
+#      mysql -uroot -e "CREATE DATABASE wordpress;"
 
 - name: Create user replica
   shell: >
