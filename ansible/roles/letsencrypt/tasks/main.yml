@@ -22,12 +22,7 @@
 
     - name: Install certbot snap with option --classic
       shell: sudo snap install --classic certbot
-
-    # - name: Install certbot snap with option --classic
-    #   community.general.snap:
-    #         name: certbot
-    #         classic: yes
-    
+   
     # - name: Install cert
     #   shell: sudo certbot --nginx --dry-run -n -d www.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
 
