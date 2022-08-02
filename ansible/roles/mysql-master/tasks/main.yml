@@ -30,12 +30,12 @@
 - name: start mysqld
   service: name=mysqld state=started enabled=yes
 
-- name: Collect all possible information using passwordless root access
-  community.mysql.mysql_info:
-    login_user: root
-    filter: 
-    - databases
-    - version
+- name: Check version
+  ansible.builtin.shell: > 
+      mysql -uroot -e 'SELECT version();'
+  register: version
+- ansible.builtin.debug:
+        var: version.stdout_lines
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
