@@ -34,14 +34,11 @@
   ansible.builtin.shell: > 
       mysql -uroot -e 'SELECT version();'
   register: version
-- ansible.builtin.debug:
-        var: version.stdout_lines[0]
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
        var: version
        
-
 - name: Apply config
   template:
     src: templates/my.cnf.j2
@@ -56,3 +53,31 @@
 - name: Create user replica
   shell: >
      mysql -uroot -e "CREATE USER 'replica'@'{{ db2 }}' IDENTIFIED BY 'replica';"
+
+- name: Grant previllegies
+  shell: >
+     mysql -uroot -e "GRANT REPLICATION SLAVE ON *.* TO 'replica'@'{{ db2 }}';"
+
+- name: Get var1
+  ansible.builtin.shell: > 
+      mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $1}'
+  register: var1
+
+- name: Get var2
+  ansible.builtin.shell: > 
+      mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $2}'
+  register: var2
+
+- name: Create database WORDPRESS
+  shell: >
+     mysql -uroot -e "CREATE DATABASE wordpress;"
+
+- name: Create user replica
+  shell: >
+     mysql -uroot -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'replica';"     
+
+- name: Grant previllegies
+  shell: >
+     GRANT ALL PRIVILEGES ON wordpress.* TO 'worpress'@'localhost';
+ 
+     

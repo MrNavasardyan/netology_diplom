@@ -21,16 +21,20 @@
   roles:
        - mysql-master
   
-# - hosts: 
-#       db-slave
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#        - mysql-slave
+- hosts: 
+      db-slave
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  vars: 
+    db1: "{{ hostvars['db01.grachikn.ru']['ansible_default_ipv4']['address'] }}"
+    var1: var1.stdout_lines
+    var2: var2.stdout_lines
+  roles:
+       - mysql-slave
 
 # - hosts: 
 #       app

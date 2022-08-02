@@ -1,16 +1,57 @@
----
-# tasks file for mysql-slave
-- name: install mariadb
-  yum: name={{ item }} state=present
-  with_items:
-  - mariadb
-  - mariadb-server
-- name: install conf
-  copy: src=my.cnf dest=/etc/my.cnf
-- name: start mariadb
-  service: name=mariadb state=started enabled=yes
+- name: Install wget
+  yum:
+    name=wget
+    state=latest 
 
-- name: command
-  shell: mysql -e "change master to master_host='db01.grachikn.ru',master_user='backuper',master_password='backuper',master_log_file='master_bin.000001',master_log_pos=30364;"
-- name: command
-  shell: mysql -e "start slave;"
+- name: Create a directory for MySQL
+  ansible.builtin.file:
+    path: /home/mysql
+    state: directory
+
+- name: Download file MySQL
+  ansible.builtin.get_url:
+    url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+    dest: /home/mysql
+   
+- name: rpm MySQL
+  command: rpm -ivh /home/mysql/mysql-community-release-el7-5.noarch.rpm
+  ignore_errors: True
+
+- name: Install updates
+  yum: name=* state=latest
+
+- name: Install MySQL
+  yum:
+    name=mysql-server
+    state=latest
+
+- name: start mysqld
+  service: name=mysqld state=started enabled=yes
+
+- name: Check version
+  ansible.builtin.shell: > 
+      mysql -uroot -e 'SELECT version();'
+  register: version
+
+- name: PRINT OUT THE OUTPUT VARIABLE
+  debug:
+       var: version
+       
+- name: Apply config
+  template:
+    src: templates/my.cnf.j2
+    dest: /etc/my.cnf
+
+- name: Restart service mysqld
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: yes
+    name: mysqld
+
+- name: Exec cmd Stop slave
+  shell: >
+     mysql -uroot -e "STOP SLAVE;"
+
+- name: Exec cmd Stop slave
+  shell: >
+     mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ db1 }}', MASTER_USER='replica', MASTER_PASSWORD='strong_password', MASTER_LOG_FILE='{{ var1 }}', MASTER_LOG_POS={{ var2 }};"
