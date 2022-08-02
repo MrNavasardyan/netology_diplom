@@ -19,16 +19,16 @@
   roles:
        - mysql-master
   
-- hosts: 
-      db-slave
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-       - mysql-slave
+# - hosts: 
+#       db-slave
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#        - mysql-slave
 
 # - hosts: 
 #       app

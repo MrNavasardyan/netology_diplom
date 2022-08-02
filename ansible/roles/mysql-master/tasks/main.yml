@@ -1,20 +1,35 @@
 ---
 # tasks file for mysql-master
 
-- name: install mariadb
-  yum: name={{ item }} state=present
-  with_items:
-  - mariadb
-  - mariadb-server
+- name: wget MySQL
+  shell: wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm && rpm -ivh mysql-community-release-el7-5.noarch.rpm
 
-- name: install conf
-  copy: src=my.cnf dest=/etc/my.cnf
+- name: Install updates
+  yum: name=* state=latest
+  when: ansible_os_family == "RedHat
+
+- name: Install MySQL
+  yum:
+    name=mysql-server
+    state=latest
+
+- name: Check version
+  command: mysql -uroot -e 'SELECT version();'
+  register: mysqlversion
 
 - name: start mariadb
   service: name=mariadb state=started enabled=yes
 
-- name: mysql
-  command: mysql -e "create database wordpress;grant all on wordpress.* to wordpress@'db01.grachikn.ru' identified by '123456';"
-  
-- name: command
-  command: mysql -e "grant replication slave,replication client on *.* to 'backuper'@'db01.grachikn.ru' identified by 'backuper';"
+- name: Apply config
+  template:
+    src: templates/my.cnf.j2
+    dest: /etc/my.cnf
+
+- name: Restart service mysqld
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: yes
+    name: mysqld
+
+- name: Create user replica
+  command: mysql -uroot -e CREATE USER 'replica'@'{{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}' IDENTIFIED BY 'replica';
