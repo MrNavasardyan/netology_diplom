@@ -5,8 +5,18 @@
     name=wget
     state=latest 
 
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: /home/mysql
+    state: directory
+
+- name: Download file and force basic auth
+  ansible.builtin.get_url:
+    url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+    dest: /home/mysql
+
 - name: wget MySQL
-  shell: wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm && rpm -ivh mysql-community-release-el7-5.noarch.rpm
+  shell: rpm -ivh /home/mysql/mysql-community-release-el7-5.noarch.rpm
 
 - name: Install updates
   yum: name=* state=latest
