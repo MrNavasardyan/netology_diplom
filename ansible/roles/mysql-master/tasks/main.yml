@@ -5,12 +5,12 @@
     name=wget
     state=latest 
 
-- name: Create a directory if it does not exist
+- name: Create a directory for MySQL
   ansible.builtin.file:
     path: /home/mysql
     state: directory
 
-- name: Download file and force basic auth
+- name: Download file MySQL
   ansible.builtin.get_url:
     url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
     dest: /home/mysql
