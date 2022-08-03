@@ -9,6 +9,7 @@
     centos
   vars:
     my_var1:
+    my_var2:
 
 
 - hosts: 

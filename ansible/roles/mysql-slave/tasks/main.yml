@@ -39,11 +39,11 @@
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
-       var: var1
+       var: my_var1
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
-       var: var2.stdout_lines[0] 
+       var: my_var2
 
        
 - name: Apply config
