@@ -14,7 +14,6 @@
   ansible.builtin.get_url:
     url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
     dest: /home/mysql
-    run_once: true
    
 - name: rpm MySQL
   command: rpm -ivh /home/mysql/mysql-community-release-el7-5.noarch.rpm
@@ -28,7 +27,7 @@
   yum:
     name=mysql-server
     state=latest
-  run_once: true
+  
   
 - name: start mysqld
   service: name=mysqld state=started enabled=yes
@@ -94,16 +93,15 @@
 - name: Create database WORDPRESS
   shell: >
      mysql -uroot -e "CREATE DATABASE wordpress;"
-  run_once: true
+
 
 - name: Create user replica
   shell: >
      mysql -uroot -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'replica';"     
-  run_once: true
 
 - name: Grant previllegies
   shell: >
      mysql -uroot -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'worpress'@'localhost';"
-  run_once: true
+
  
      
