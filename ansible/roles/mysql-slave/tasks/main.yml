@@ -39,7 +39,7 @@
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
-       var: var1.stdout_lines[0] 
+       var: var1
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
