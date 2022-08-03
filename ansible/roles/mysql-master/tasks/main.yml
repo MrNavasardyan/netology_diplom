@@ -74,7 +74,7 @@
 
 - name: set_fact
   set_fact: my_var1="{{ var1.stdout_lines[0] }}" 
-  delegate_to: "{{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}" 
+  delegate_to: "{{ groups['db_slave'][0] }}" 
       
 - name: Get var2
   shell: > 
@@ -87,7 +87,7 @@
 
 - name: set_fact
   set_fact: my_var2="{{ var2.stdout_lines[0] }}"
-  delegate_to: "{{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}"
+  delegate_to: "{{ groups['db_slave'][0] }}"
   
              
 
