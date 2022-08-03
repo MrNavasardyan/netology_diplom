@@ -66,7 +66,7 @@
   shell: > 
       mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $1}'
   register: var1
-  ansible.builtin.set_fact:
+  set_fact:
     my_var1: "{{ var1.stdout_lines[0] }}"
 
 - name: PRINT OUT THE OUTPUT VARIABLE
