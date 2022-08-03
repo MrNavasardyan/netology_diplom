@@ -1,17 +1,16 @@
 ---
-# - hosts: all
-#   gather_facts: true
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
+- hosts: all
+  gather_facts: true
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
 
 
 - hosts: 
       db_master
-  gather_facts: false
   become:
     true
   become_user:
@@ -25,7 +24,6 @@
   
 - hosts: 
       db_slave
-  gather_facts: false
   become:
     true
   become_user:

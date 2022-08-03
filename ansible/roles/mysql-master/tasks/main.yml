@@ -67,8 +67,9 @@
       mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $1}'
   register: var1
 
+
 - name: set_fact
-  set_fact: my_var1="{{ var1 }}"
+  set_fact: my_var1="{{ var1.stdout_lines[0] }}"
   delegate_facts: true
   delegate_to: "{{ groups['db_slave'][0] }}" 
 
