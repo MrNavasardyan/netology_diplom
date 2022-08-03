@@ -36,6 +36,15 @@
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
        var: version.stdout_lines[1]
+
+- name: PRINT OUT THE OUTPUT VARIABLE
+  debug:
+       var: var1.stdout_lines[0] 
+
+- name: PRINT OUT THE OUTPUT VARIABLE
+  debug:
+       var: var2.stdout_lines[0] 
+
        
 - name: Apply config
   template:

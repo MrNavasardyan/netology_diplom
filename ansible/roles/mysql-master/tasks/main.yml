@@ -96,7 +96,7 @@
      mysql -uroot -e "CREATE DATABASE wordpress;"
 
 
-- name: Create user replica
+- name: Create user worpdress
   shell: >
      mysql -uroot -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'replica';"     
 
