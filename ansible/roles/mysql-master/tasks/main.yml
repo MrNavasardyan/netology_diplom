@@ -55,21 +55,23 @@
 - name: Create user replica
   shell: >
      mysql -uroot -e "CREATE USER 'replica'@'{{ db2 }}' IDENTIFIED BY 'replica';"
-  run_once: true
+  
 
 - name: Grant previllegies
   shell: >
      mysql -uroot -e "GRANT REPLICATION SLAVE ON *.* TO 'replica'@'{{ db2 }}';"
-  run_once: true
+  
 
 - name: Get var1
   shell: > 
       mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $1}'
   register: var1
+  ansible.builtin.set_fact:
+    my_var1: "{{ var1.stdout_lines[0] }}"
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
-       var: var1.stdout_lines[0]
+       var: my_var1
 
 - name: Get var2
   shell: > 
