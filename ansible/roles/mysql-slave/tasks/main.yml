@@ -1,8 +1,3 @@
-- name: Install wget
-  yum:
-    name=wget
-    state=latest 
-
 - name: Create a directory for MySQL
   ansible.builtin.file:
     path: /home/mysql
@@ -37,13 +32,13 @@
   debug:
        var: version.stdout_lines[1]
 
-- name: PRINT OUT THE OUTPUT VARIABLE
+- name: PRINT my_var1
   debug:
-       var: var1
+       var: my_var1
 
-- name: PRINT OUT THE OUTPUT VARIABLE
+- name: PRINT my_var2
   debug:
-       var: var2.stdout_lines[0] 
+       var: my_var2
 
        
 - name: Apply config

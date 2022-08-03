@@ -1,9 +1,5 @@
 ---
 # tasks file for mysql-master
-- name: Install wget
-  yum:
-    name=wget
-    state=latest 
 
 - name: Create a directory for MySQL
   ansible.builtin.file:
@@ -80,9 +76,13 @@
       mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $2}'
   register: var2
 
+- name: Set var1
+  set_fact:
+    my_var2: "{{ var2.stdout_lines[0] }}"
+
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
-       var: var2.stdout_lines[0]
+       var: my_var2
              
 
 - name: Create database WORDPRESS

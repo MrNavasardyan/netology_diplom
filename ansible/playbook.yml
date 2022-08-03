@@ -9,6 +9,7 @@
     centos
   vars:
     my_var1:
+    my_var2:
 
 
 - hosts: 
@@ -24,18 +25,18 @@
   roles:
        - mysql-master
   
-# - hosts: 
-#       db_slave
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   vars: 
-#     db1: "{{ hostvars['db01.grachikn.ru']['ansible_default_ipv4']['address'] }}"
-#   roles:
-#        - mysql-slave
+- hosts: 
+      db_slave
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  vars: 
+    db1: "{{ hostvars['db01.grachikn.ru']['ansible_default_ipv4']['address'] }}"
+  roles:
+       - mysql-slave
 
 # - hosts: 
 #       app
