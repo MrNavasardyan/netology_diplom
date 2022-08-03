@@ -37,11 +37,11 @@
   debug:
        var: version.stdout_lines[1]
 
-- name: PRINT OUT THE OUTPUT VARIABLE
+- name: PRINT my_var1
   debug:
        var: my_var1
 
-- name: PRINT OUT THE OUTPUT VARIABLE
+- name: PRINT my_var2
   debug:
        var: my_var2
 
