@@ -68,13 +68,13 @@
   register: var1
 
 - name: set_fact
-  set_fact: my_var1="{{ var1 }}"
+  set_fact: my_var1="{{ var1.stdout_lines[0] }}"
   delegate_facts: true
   delegate_to: "{{ groups['db_slave'][0] }}" 
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
-       var: var1
+       var: my_var1
 
 - name: Get var2
   shell: > 
@@ -88,8 +88,7 @@
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
-
-       var: var2.stdout_lines[0]  
+       var: my_var1
              
 
 - name: Create database WORDPRESS
