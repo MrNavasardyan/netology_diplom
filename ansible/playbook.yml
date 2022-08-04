@@ -11,18 +11,6 @@
 
 - hosts: 
       db_master
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  vars:
-     db2: "{{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}"
-  roles:
-       - mysql-master
-  
-- hosts: 
       db_slave
   become:
     true
@@ -30,10 +18,11 @@
     root
   remote_user:
     centos
-  vars: 
-    db1: "{{ hostvars['db01.grachikn.ru']['ansible_default_ipv4']['address'] }}"
   roles:
+       - mysql-master
        - mysql-slave
+
+       
 
 # - hosts: 
 #       app

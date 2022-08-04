@@ -1,61 +1,45 @@
-- name: Create a directory for MySQL
-  ansible.builtin.file:
-    path: /home/mysql
-    state: directory
-
-- name: Download file MySQL
-  ansible.builtin.get_url:
-    url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
-    dest: /home/mysql
-   
-- name: rpm MySQL
-  command: rpm -ivh /home/mysql/mysql-community-release-el7-5.noarch.rpm
-  ignore_errors: True
-
-- name: Install updates
-  yum: name=* state=latest
-
-- name: Install MySQL
-  yum:
-    name=mysql-server
-    state=latest
-
-- name: start mysqld
-  service: name=mysqld state=started enabled=yes
-
 - name: Check version
   ansible.builtin.shell: > 
       mysql -uroot -e 'SELECT version();'
   register: version
+  when: ansible_facts['ansible_default_ipv4']['address'] == {{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
        var: version.stdout_lines[1]
+  when: ansible_facts['ansible_default_ipv4']['address'] == {{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}
 
 - name: PRINT my_var1
   debug:
        var: my_var1
+  when: ansible_facts['ansible_default_ipv4']['address'] == {{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}
 
 - name: PRINT my_var2
   debug:
        var: my_var2
+  when: ansible_facts['ansible_default_ipv4']['address'] == {{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}
 
        
 - name: Apply config
   template:
     src: templates/my.cnf.j2
     dest: /etc/my.cnf
+  when: ansible_facts['ansible_default_ipv4']['address'] == {{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}
+  
 
 - name: Restart service mysqld
   ansible.builtin.systemd:
     state: restarted
     daemon_reload: yes
     name: mysqld
+  when: ansible_facts['ansible_default_ipv4']['address'] == {{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}
 
 - name: Exec cmd Stop slave
   shell: >
      mysql -uroot -e "STOP SLAVE;"
+  when: ansible_facts['ansible_default_ipv4']['address'] == {{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}
 
 - name: Exec CHANGE MASTER TO MASTER_HOST
   shell: >
      mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ db1 }}', MASTER_USER='replica', MASTER_PASSWORD='strong_password', MASTER_LOG_FILE='{{ my_var1 }}', MASTER_LOG_POS={{ my_var2 }};"
+  when: ansible_facts['ansible_default_ipv4']['address'] == {{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}
