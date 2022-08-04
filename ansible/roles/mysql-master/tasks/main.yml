@@ -41,72 +41,72 @@
   template:
     src: templates/my.cnf.j2
     dest: /etc/my.cnf
-  when: ansible_facts["ansible_hostname"] == "db01"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: Restart service mysqld
   ansible.builtin.systemd:
     state: restarted
     daemon_reload: yes
     name: mysqld
-  when: ansible_facts["ansible_hostname"] == "db01"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: Create user replica
   shell: >
      mysql -uroot -e "CREATE USER 'replica'@'{{ db2 }}' IDENTIFIED BY 'replica';"
-  when: ansible_facts["ansible_hostname"] == "db01"
+  when: ansible_facts['ansible_hostname'] == "db01"
   
 
 - name: Grant previllegies
   shell: >
      mysql -uroot -e "GRANT REPLICATION SLAVE ON *.* TO 'replica'@'{{ db2 }}';"
-  when: ansible_facts["ansible_hostname"] == "db01"
+  when: ansible_facts['ansible_hostname'] == "db01"
   
 
 - name: Get var1
   shell: > 
       mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $1}'
   register: var1
-  when: ansible_facts["ansible_hostname"] == "db01"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: Set var1
   set_fact:
     my_var1: "{{ var1.stdout_lines[0] }}"
-  when: ansible_facts["ansible_hostname"] == "db01"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: PRINT OUT my_var1
   debug:
        var: my_var1
-  when: ansible_facts["ansible_hostname"] == "db01"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: Get var2
   shell: > 
       mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $2}'
   register: var2
-  when: ansible_facts["ansible_hostname"] == "db01"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: Set var2
   set_fact:
     my_var2: "{{ var2.stdout_lines[0] }}"
-  when: ansible_facts["ansible_hostname"] == "db01"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: PRINT OUT my_var2
   debug:
        var: my_var2
-  when: ansible_facts["ansible_hostname"] == "db01"
+  when: ansible_facts['ansible_hostname'] == "db01"
              
 
 - name: Create database WORDPRESS
   shell: >
      mysql -uroot -e "CREATE DATABASE wordpress;"
-  when: ansible_facts["ansible_hostname"] == "db01"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: Create user worpdress
   shell: >
      mysql -uroot -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'replica';"     
-  when: ansible_facts["ansible_hostname"] == "db01"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: Grant previllegies
   shell: >
      mysql -uroot -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'worpress'@'localhost';"
-  when: ansible_facts["ansible_hostname"] == "db01"
+  when: ansible_facts['ansible_hostname'] == "db01"
  

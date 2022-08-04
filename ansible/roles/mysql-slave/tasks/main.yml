@@ -2,29 +2,29 @@
   ansible.builtin.shell: > 
       mysql -uroot -e 'SELECT version();'
   register: version
-  when: ansible_facts["ansible_hostname"] == "db02"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
        var: version.stdout_lines[1]
-  when: ansible_facts["ansible_hostname"] == "db02"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: PRINT my_var1
   debug:
        var: my_var1
-  when: ansible_facts["ansible_hostname"] == "db02"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: PRINT my_var2
   debug:
        var: my_var2
-  when: ansible_facts["ansible_hostname"] == "db02"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
        
 - name: Apply config
   template:
     src: templates/my.cnf.j2
     dest: /etc/my.cnf
-  when: ansible_facts["ansible_hostname"] == "db02"
+  when: ansible_facts['ansible_hostname'] == "db01"
   
 
 - name: Restart service mysqld
@@ -32,14 +32,14 @@
     state: restarted
     daemon_reload: yes
     name: mysqld
-  when: ansible_facts["ansible_hostname"] == "db02"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: Exec cmd Stop slave
   shell: >
      mysql -uroot -e "STOP SLAVE;"
-  when: ansible_facts["ansible_hostname"] == "db02"
+  when: ansible_facts['ansible_hostname'] == "db01"
 
 - name: Exec CHANGE MASTER TO MASTER_HOST
   shell: >
      mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ db1 }}', MASTER_USER='replica', MASTER_PASSWORD='strong_password', MASTER_LOG_FILE='{{ my_var1 }}', MASTER_LOG_POS={{ my_var2 }};"
-  when: ansible_facts["ansible_hostname"] == "db02"
+  when: ansible_facts['ansible_hostname'] == "db01"
