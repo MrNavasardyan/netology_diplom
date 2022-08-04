@@ -41,14 +41,14 @@
   template:
     src: templates/my.cnf.j2
     dest: /etc/my.cnf
-  when: ansible_host == "{{ hostvars['db01.grachikn.ru']['ansible_default_ipv4']['address'] }}"
+  when: ansible_hostname == "db01"
 
 - name: Restart service mysqld
   ansible.builtin.systemd:
     state: restarted
     daemon_reload: yes
     name: mysqld
-  when: ansible_facts['ansible_hostname'] == "db01"
+  when: ansible_hostname == "db01"
 
 - name: Create user replica
   shell: >
