@@ -41,7 +41,7 @@
   template:
     src: templates/my.cnf.j2
     dest: /etc/my.cnf
-  when: ansible_facts['ansible_hostname'] == "db01"
+  when: ansible_host == "{{ hostvars['app.grachikn.ru']['ansible_default_ipv4']['address'] }}"
 
 - name: Restart service mysqld
   ansible.builtin.systemd:
