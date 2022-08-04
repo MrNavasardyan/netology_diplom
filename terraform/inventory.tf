@@ -14,10 +14,8 @@ resource "local_file" "inventory" {
     [monitoring]
     monitoring.${var.my_domain} ansible_host=${yandex_compute_instance.monitoring.network_interface.0.nat_ip_address}
 
-    [db_master]
+    [db]
     db01.${var.my_domain} ansible_host=${yandex_compute_instance.db-master.network_interface.0.nat_ip_address}
-
-    [db_slave]
     db02.${var.my_domain} ansible_host=${yandex_compute_instance.db-slave.network_interface.0.nat_ip_address}
 
     [proxy]
@@ -27,9 +25,3 @@ resource "local_file" "inventory" {
   filename = "../ansible/inventory.ini"
 }
 
-# [nodes:children]
-#     app
-#     gitlab
-#     monitoring
-#     proxy
-#     db

@@ -9,9 +9,7 @@
     centos
 
 
-- hosts: 
-      db_master
-      db_slave
+- hosts: db
   become:
     true
   become_user:
