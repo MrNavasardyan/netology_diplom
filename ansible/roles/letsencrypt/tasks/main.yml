@@ -1,17 +1,25 @@
-    - name: Install EPEL Repo
-      yum:
-        name=epel-release
-        state=present
-
     - name: Install snapd
       yum: name=snapd state=latest
     
     - name: Enable systemd
-      shell: systemctl enable --now snapd.socket
+      shell: >
+        systemctl enable --now snapd.socket
     
     - name: Create symbolic link
-      shell: sudo ln -s /var/lib/snapd/snap /snap     
+      shell: >
+        sudo ln -s /var/lib/snapd/snap /snap    
 
+    - name: sudo snap install core; sudo snap refresh core 
+      shell: > 
+          snap install core
+
+    - name: snap refresh core 
+      shell: > 
+          snap refresh core 
+
+    - name: ln -s /snap/bin/certbot /usr/bin/certbot
+      shell: > 
+          ln -s /snap/bin/certbot /usr/bin/certbot
     - name: Install certbot snap with option --classic
       shell: >
            sudo snap install --classic certbot
