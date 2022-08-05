@@ -62,7 +62,7 @@
 
 - name: Exec "CHANGE MASTER TO MASTER_HOST"
   shell: >
-     mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ db1 }}', MASTER_USER='replica', MASTER_PASSWORD='replica', MASTER_LOG_FILE = '{{ myvar1 }}', MASTER_LOG_POS = '{{ myvar2 }}';"
+     mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ db1 }}', MASTER_USER='replica', MASTER_PASSWORD='replica', MASTER_LOG_FILE = '{{ myvar1 }}', MASTER_LOG_POS = {{ myvar2 }};"
 
 
 - name: Exec "CHANGE MASTER TO MASTER_HOST"
