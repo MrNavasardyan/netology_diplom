@@ -1,5 +1,7 @@
 - name: Show me var
-  debug: msg="{{ hostvars['put the hostname in here']['commandserver'] }}"
+  debug: msg="{{ hostvars['db01.grachikn.ru']['myvar2'] }}"
+
+
 - name: Create a directory for MySQL
   ansible.builtin.file:
     path: /home/mysql
