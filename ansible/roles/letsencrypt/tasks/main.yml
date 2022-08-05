@@ -13,7 +13,8 @@
       shell: sudo ln -s /var/lib/snapd/snap /snap     
 
     - name: Install certbot snap with option --classic
-      shell: sudo snap install --classic certbot
+      shell: >
+           sudo snap install --classic certbot
       ignore_errors: True
    
     - name: Pause for 20 seconds
@@ -21,10 +22,12 @@
           seconds: 5
 
     - name: Install certbot snap with option --classic
-      shell: sudo snap install --classic certbot
+      shell: >
+          sudo snap install --classic certbot
    
     - name: Install cert
-      shell: sudo certbot --nginx --dry-run -n -d www.grachikn.ru -d grafana.grachikn.ru -d prometheus.grachikn.ru -d alertmanager.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
+      shell: > 
+          sudo certbot --nginx --dry-run -n -d www.grachikn.ru -d grafana.grachikn.ru -d prometheus.grachikn.ru -d alertmanager.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
 
     - name: Nginx reload
       shell: service nginx reload
