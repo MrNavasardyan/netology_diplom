@@ -10,6 +10,7 @@
 
 
 - hosts: db_master
+  gather_facts: true
   become:
     true
   become_user:
