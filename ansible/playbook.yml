@@ -9,7 +9,7 @@
     centos
 
 
-- hosts: db
+- hosts: db_master
   become:
     true
   become_user:
@@ -18,7 +18,19 @@
     centos
   roles:
        - mysql-master
-       - mysql-slave
+
+
+
+- hosts: db_slave
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+       - mysql-master
+
 
        
 
