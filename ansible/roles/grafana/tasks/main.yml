@@ -1,9 +1,19 @@
 ---
 # tasks file for grafana
+- name: Create a directory for Grafana
+  ansible.builtin.file:
+    path: /home/grafana
+    state: directory
+
+- name: Download file Grafana RPM
+  ansible.builtin.get_url:
+    url: https://mirror.yandex.ru/centos/7/updates/x86_64/Packages/{{ package }}
+    dest: /home/mysql
+
 - name: Install Grafana Web Server on RedHat Family
   yum:
-    name=grafana
-    state=latest
+    name=/home/grafana
+    state=present
 
 - name: Systemctl Grafana Start
   systemd:
