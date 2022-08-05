@@ -8,7 +8,7 @@
 - name: Download file Grafana RPM
   ansible.builtin.get_url:
     url: https://mirror.yandex.ru/centos/7/updates/x86_64/Packages/{{ package }}
-    dest: /home/mysql
+    dest: /home/grafana
 
 - name: Install Grafana Web Server on RedHat Family
   yum:
