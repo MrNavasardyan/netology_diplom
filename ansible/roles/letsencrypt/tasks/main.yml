@@ -9,13 +9,14 @@
       shell: >
         ln -s /var/lib/snapd/snap /snap    
 
-    - name: sudo snap install core; sudo snap refresh core 
+    - name: sudo snap install core
       shell: > 
-          snap install core
+          sudo snap install core; sudo snap refresh core
+      ignore_errors: True
 
-    - name: snap refresh core 
+    - name: sudo snap install core
       shell: > 
-          snap refresh core 
+          sudo snap install core; sudo snap refresh core
 
     - name: ln -s /snap/bin/certbot /usr/bin/certbot
       shell: > 
