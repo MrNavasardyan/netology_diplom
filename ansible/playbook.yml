@@ -10,15 +10,12 @@
 
 
 - hosts: db_master
-  gather_facts: false
   become:
     true
   become_user:
     root
   remote_user:
     centos
-  vars:
-    db2: "{{ hostvars['db01.grachikn.ru']['ansible_all_ipv4_addresses'] }}"
   roles:
        - mysql-master
 
