@@ -29,7 +29,7 @@
     name=mysql-server
     state=latest
 
-- name: start mysqld
+- name: Start mysqld
   service: name=mysqld state=started enabled=yes
     
 - name: Check version
@@ -38,12 +38,12 @@
   register: version
 
 
-- name: PRINT OUT THE OUTPUT VARIABLE
+- name: PRINT MySQL version
   debug:
        var: version.stdout_lines[1]
 
        
-- name: Apply config
+- name: Apply MySQL config
   template:
     src: templates/my.cnf.j2
     dest: /etc/my.cnf
@@ -60,8 +60,8 @@
      mysql -uroot -e "STOP SLAVE;"
 
 
-- name: Exec CHANGE MASTER TO MASTER_HOST
+- name: Exec "CHANGE MASTER TO MASTER_HOST"
   shell: >
-     mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ hostvars['db01.grachikn.ru']['ansible_default_ipv4']['address'] }}', MASTER_USER='replica', MASTER_PASSWORD='strong_password', MASTER_LOG_FILE='{{ hostvars['db01.grachikn.ru']['my_var1'] }}', MASTER_LOG_POS='{{ hostvars['db01.grachikn.ru']['my_var2'] }}'';"
+     mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ hostvars['db01.grachikn.ru']['ansible_default_ipv4']['address'] }}', MASTER_USER='replica', MASTER_PASSWORD='replica', MASTER_LOG_FILE='{{ hostvars['db01.grachikn.ru']['my_var1'] }}', MASTER_LOG_POS='{{ hostvars['db01.grachikn.ru']['my_var2'] }}'';"
 
 
