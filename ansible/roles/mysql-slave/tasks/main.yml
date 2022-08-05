@@ -1,5 +1,9 @@
-- name: Show me var
+- name: Show me var1
+  debug: msg="{{ hostvars['db01.grachikn.ru']['myvar1'] }}"
+
+- name: Show me var2
   debug: msg="{{ hostvars['db01.grachikn.ru']['myvar2'] }}"
+
 
 
 - name: Create a directory for MySQL
@@ -24,6 +28,9 @@
   yum:
     name=mysql-server
     state=latest
+
+- name: start mysqld
+  service: name=mysqld state=started enabled=yes
     
 - name: Check version
   ansible.builtin.shell: > 
