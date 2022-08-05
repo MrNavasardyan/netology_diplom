@@ -16,6 +16,8 @@
     root
   remote_user:
     centos
+  vars:
+    db2: "{{ hostvars['db2.grachikn.ru']['ansible_default_ipv4']['address'] }}"
   roles:
        - mysql-master
 
@@ -28,6 +30,8 @@
     root
   remote_user:
     centos
+  vars:
+    db1: "{{ hostvars['db1.grachikn.ru']['ansible_default_ipv4']['address'] }}"
   roles:
        - mysql-master
 
