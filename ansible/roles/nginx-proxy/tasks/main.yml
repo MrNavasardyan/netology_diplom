@@ -20,7 +20,7 @@
            
 - name: nginx restart
   systemd:
-    name: mysql
+    name: nginx
     state: restarted
 
 - name: set sebook
