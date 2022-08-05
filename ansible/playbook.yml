@@ -47,19 +47,6 @@
      - nginx
 
 - hosts: 
-    proxy
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-    - nginx-proxy
-    # - letsencrypt
-
-
-- hosts: 
       all
   become:
     true
@@ -82,3 +69,15 @@
    - prometheus
    - alertmanager
    - grafana
+
+- hosts: 
+    proxy
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+    - nginx-proxy
+    # - letsencrypt
