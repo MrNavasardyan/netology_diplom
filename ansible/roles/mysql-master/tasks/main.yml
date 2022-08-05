@@ -52,12 +52,12 @@
 
 - name: Create user replica
   shell: >
-     mysql -uroot -e "CREATE USER 'replica'@'{{ db2 }}' IDENTIFIED BY 'replica';"
+     mysql -uroot -e "CREATE USER 'replica'@'{{ hostvars['db2.grachikn.ru']['ansible_default_ipv4']['address'] }}' IDENTIFIED BY 'replica';"
  
 
 - name: Grant previllegies
   shell: >
-     mysql -uroot -e "GRANT REPLICATION SLAVE ON *.* TO 'replica'@'{{ db2 }}';"
+     mysql -uroot -e "GRANT REPLICATION SLAVE ON *.* TO 'replica'@'{{ hostvars['db2.grachikn.ru']['ansible_default_ipv4']['address'] }}';"
            
 
 - name: Create database WORDPRESS
@@ -67,7 +67,7 @@
 
 - name: Create user worpdress
   shell: >
-     mysql -uroot -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'replica';"     
+     mysql -uroot -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'wordpress';"     
 
 
 - name: Grant previllegies
