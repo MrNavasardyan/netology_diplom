@@ -10,7 +10,7 @@
 
 
 - hosts: db_master
-  gather_facts: true
+  gather_facts: false
   become:
     true
   become_user:
@@ -22,15 +22,15 @@
 
 
 
-# - hosts: db_slave
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#        - mysql-slave
+- hosts: db_slave
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+       - mysql-slave
 
 
        
