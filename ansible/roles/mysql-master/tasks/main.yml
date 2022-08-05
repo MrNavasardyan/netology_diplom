@@ -88,7 +88,7 @@
   register: var2
 
 - name: Set hostname of command server as fact
-  set_fact: myvar2="{{ var1.stdout_lines[0] }}"
+  set_fact: myvar2="{{ var2.stdout_lines[0] }}"
 
 
 
