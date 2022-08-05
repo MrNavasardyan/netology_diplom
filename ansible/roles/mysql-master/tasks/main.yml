@@ -82,6 +82,14 @@
 - name: Set hostname of command server as fact
   set_fact: myvar1="{{ var1.stdout_lines[0] }}"
 
+- name: Get var2
+  shell: > 
+      mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $2}'
+  register: var2
+
+- name: Set hostname of command server as fact
+  set_fact: myvar2="{{ var1.stdout_lines[0] }}"
+
 
 
 
