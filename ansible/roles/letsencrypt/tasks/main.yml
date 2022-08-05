@@ -23,8 +23,8 @@
     - name: Install certbot snap with option --classic
       shell: sudo snap install --classic certbot
    
-    # - name: Install cert
-    #   shell: sudo certbot --nginx --dry-run -n -d www.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
+    - name: Install cert
+      shell: sudo certbot --nginx --dry-run -n -d www.grachikn.ru -d www.grafana.grachikn.ru -d www.prometheus.grachikn.ru -d www.alertmanager.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
 
     - name: Nginx reload
       shell: service nginx reload

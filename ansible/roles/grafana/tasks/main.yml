@@ -12,7 +12,7 @@
 
 - name: Install Grafana Web Server on RedHat Family
   yum:
-    name=/home/grafana
+    name=/home/grafana/{{ package }}
     state=present
 
 - name: Systemctl Grafana Start
