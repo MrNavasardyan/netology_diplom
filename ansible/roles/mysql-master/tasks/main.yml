@@ -57,7 +57,7 @@
 
 - name: Grant previllegies
   shell: >
-     mysql -uroot -e "GRANT REPLICATION SLAVE ON *.* TO 'replica'@'{{ db2 }}'
+     mysql -uroot -e "GRANT REPLICATION SLAVE ON *.* TO 'replica'@'{{ db2 }}';"
            
 
 - name: Create database WORDPRESS
