@@ -1,2 +1,3 @@
 ---
 # vars file for mysql-slave
+db1: "{{ hostvars['db2.grachikn.ru']['ansible_default_ipv4']['address'] }}"
