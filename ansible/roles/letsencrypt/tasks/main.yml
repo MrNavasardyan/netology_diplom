@@ -7,7 +7,7 @@
     
     - name: Create symbolic link
       shell: >
-        sudo ln -s /var/lib/snapd/snap /snap    
+        ln -s /var/lib/snapd/snap /snap    
 
     - name: sudo snap install core; sudo snap refresh core 
       shell: > 
@@ -20,6 +20,7 @@
     - name: ln -s /snap/bin/certbot /usr/bin/certbot
       shell: > 
           ln -s /snap/bin/certbot /usr/bin/certbot
+
     - name: Install certbot snap with option --classic
       shell: >
            sudo snap install --classic certbot
