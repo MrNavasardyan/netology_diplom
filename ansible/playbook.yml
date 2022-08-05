@@ -10,6 +10,7 @@
 
 
 - hosts: db_master
+  gather_facts: false
   become:
     true
   become_user:
@@ -24,6 +25,7 @@
 
 
 - hosts: db_slave
+  gather_facts: false
   become:
     true
   become_user:
