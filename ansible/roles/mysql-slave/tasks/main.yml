@@ -62,6 +62,6 @@
 
 - name: Exec "CHANGE MASTER TO MASTER_HOST"
   shell: >
-     mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ hostvars['db01.grachikn.ru']['ansible_default_ipv4']['address'] }}', MASTER_USER='replica', MASTER_PASSWORD='replica', MASTER_LOG_FILE='{{ hostvars['db01.grachikn.ru']['my_var1'] }}', MASTER_LOG_POS='{{ hostvars['db01.grachikn.ru']['my_var2'] }}'';"
+     mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ hostvars['db01.grachikn.ru']['ansible_default_ipv4']['address'] }}', MASTER_USER='replica', MASTER_PASSWORD='replica', MASTER_LOG_FILE='{{ hostvars['db01.grachikn.ru']['myvar1'] }}', MASTER_LOG_POS='{{ myvar2 }}';"
 
 
