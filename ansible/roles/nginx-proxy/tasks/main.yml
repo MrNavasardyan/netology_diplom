@@ -18,8 +18,10 @@
     src: templates/nginx.conf.v2.j2
     dest: /etc/nginx/nginx.conf
            
-- name: Nginx reload
-  shell: service nginx restart
+- name: nginx restart
+  systemd:
+    name: mysql
+    state: restarted
 
 - name: set sebook
   shell: 'setsebool -P httpd_can_network_connect 1'
