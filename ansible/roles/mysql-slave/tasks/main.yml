@@ -54,7 +54,10 @@
     daemon_reload: yes
     name: mysqld
 
-
+- name: Create database "WORDPRESS"
+  shell: >
+     mysql -uroot -e "CREATE DATABASE wordpress;"
+     
 - name: Exec cmd Stop slave
   shell: >
      mysql -uroot -e "STOP SLAVE;"
