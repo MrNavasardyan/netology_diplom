@@ -23,7 +23,7 @@
 
     - name: Install certbot snap with option --classic
       shell: >
-           sudo snap install --classic certbot
+           snap install --classic certbot
       ignore_errors: True
    
     - name: Pause for 20 seconds
@@ -32,11 +32,11 @@
 
     - name: Install certbot snap with option --classic
       shell: >
-          sudo snap install --classic certbot
+          snap install --classic certbot
    
     - name: Install cert
       shell: > 
-          sudo certbot --nginx --dry-run -n -d www.grachikn.ru -d grafana.grachikn.ru -d prometheus.grachikn.ru -d alertmanager.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
+          certbot --nginx --dry-run -n -d www.grachikn.ru -d grafana.grachikn.ru -d prometheus.grachikn.ru -d alertmanager.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
 
     - name: Nginx reload
       shell: service nginx reload
