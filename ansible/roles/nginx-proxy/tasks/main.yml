@@ -18,10 +18,9 @@
     src: templates/nginx.conf.v2.j2
     dest: /etc/nginx/nginx.conf
            
-- name: nginx restart
-  systemd:
-    name: nginx
-    state: restarted
+- name: Restart nginx
+  service: name=nginx state=restarted
+  when: test_running_nginx.stdout != "" and test_nginx_config.rc == 0
 
 - name: set sebook
   shell: 'setsebool -P httpd_can_network_connect 1'
