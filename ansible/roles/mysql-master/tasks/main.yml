@@ -79,6 +79,9 @@
       mysql -uroot -e "SHOW MASTER STATUS;" | grep mysql-bin | awk '{print $1}'
   register: var1
 
+- name: Set hostname of command server as fact
+  set_fact: myvar1="{{ var1..stdout_lines[0] }}"
+
 
 
 
