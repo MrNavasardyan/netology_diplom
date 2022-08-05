@@ -1,23 +1,15 @@
 ---
 # tasks file for grafana
-# - name: Create a directory for Grafana
-#   ansible.builtin.file:
-#     path: /home/grafana
-#     state: directory
-
-# - name: Download file Grafana RPM
-#   ansible.builtin.get_url:
-#     url: https://mirror.yandex.ru/centos/7/updates/x86_64/Packages/{{ package }}
-#     dest: /home/grafana
-
 - name: Install Grafana Web Server on RedHat Family
   yum:
     name=https://grafanarel.s3.amazonaws.com/builds/grafana-2.6.0-1.x86_64.rpm
     state=present
 
-- name: Systemctl Grafana Start
-  systemd:
-    name: grafana
+- name: Start service grafana-server, if not started
+  ansible.builtin.service:
+    name: grafana-server
     state: started
-    enabled: yes
 
+- name: Enable grafana
+  shell: >
+     /sbin/chkconfig --add grafana-server

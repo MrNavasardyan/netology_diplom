@@ -62,7 +62,7 @@ http {
 
     #GRAFANA 3
     upstream grafana {
-        server {{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
+        server {{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:3000;
     }
     server {
         listen 80;
