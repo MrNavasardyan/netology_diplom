@@ -36,7 +36,7 @@
 - name: PRINT OUT THE OUTPUT VARIABLE
   debug:
        var: version.stdout_lines[1]
-       var3: hostvars[inventory_hostname]['ansible_default_ipv4']['address']
+       db2: hostvars[inventory_hostname]['ansible_default_ipv4']['address']
        
 - name: Apply config
   template:
