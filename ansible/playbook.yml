@@ -80,4 +80,4 @@
     centos
   roles:
     - nginx-proxy
-    # - letsencrypt
+    - letsencrypt
