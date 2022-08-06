@@ -31,53 +31,51 @@
 #     centos
 #   roles:
 #        - mysql-slave
+     
 
+# - hosts: 
+#       app
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#      - nginx
 
-       
+# - hosts: 
+#       all
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#      - node-exporter
 
-- hosts: 
-      app
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-     - nginx
+# - hosts: 
+#     monitoring
+#   become:
+#    true
+#   become_user:
+#    root
+#   remote_user:
+#     centos
+#   roles:
+#    - prometheus
+#    - alertmanager
+#    - grafana
 
-- hosts: 
-      all
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-     - node-exporter
-
-- hosts: 
-    monitoring
-  become:
-   true
-  become_user:
-   root
-  remote_user:
-    centos
-  roles:
-   - prometheus
-   - alertmanager
-   - grafana
-
-- hosts: 
-    proxy
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-    - nginx-proxy
-    - letsencrypt
+# - hosts: 
+#     proxy
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#     - nginx-proxy
+    # - letsencrypt
