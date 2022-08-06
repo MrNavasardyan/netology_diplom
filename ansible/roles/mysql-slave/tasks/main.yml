@@ -4,8 +4,6 @@
 - name: Show me var2
   debug: msg="{{ hostvars['db01.grachikn.ru']['myvar2'] }}"
 
-
-
 - name: Create a directory for MySQL
   ansible.builtin.file:
     path: /home/mysql
@@ -37,12 +35,10 @@
       mysql -uroot -e 'SELECT version();'
   register: version
 
-
 - name: PRINT MySQL version
   debug:
        var: version.stdout_lines[1]
 
-       
 - name: Apply MySQL config
   template:
     src: templates/my.cnf.j2
@@ -62,11 +58,9 @@
   shell: >
      mysql -uroot -e "STOP SLAVE;"
 
-
 - name: Exec "CHANGE MASTER TO MASTER_HOST"
   shell: >
      mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ db1 }}', MASTER_USER='replica', MASTER_PASSWORD='replica', MASTER_LOG_FILE = '{{ myvar1 }}', MASTER_LOG_POS = {{ myvar2 }};"
-
 
 - name: Exec "CHANGE MASTER TO MASTER_HOST"
   shell: >

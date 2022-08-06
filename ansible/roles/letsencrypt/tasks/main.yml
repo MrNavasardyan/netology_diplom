@@ -9,12 +9,12 @@
       shell: >
         ln -s /var/lib/snapd/snap /snap    
 
-    - name: sudo snap install core
+    - name: sudo snap install core with error
       shell: > 
           sudo snap install core; sudo snap refresh core
       ignore_errors: True
 
-    - name: sudo snap install core
+    - name: sudo snap install core one more time
       shell: > 
           sudo snap install core; sudo snap refresh core
 
@@ -25,15 +25,6 @@
     - name: Install certbot snap with option --classic
       shell: >
            snap install --classic certbot
-      ignore_errors: True
-   
-    - name: Pause for 20 seconds
-      ansible.builtin.pause:
-          seconds: 5
-
-    - name: Install certbot snap with option --classic
-      shell: >
-          snap install --classic certbot
    
     - name: Install cert
       shell: > 

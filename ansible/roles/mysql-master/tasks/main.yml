@@ -15,7 +15,6 @@
   command: rpm -ivh /home/mysql/mysql-community-release-el7-5.noarch.rpm
   ignore_errors: True
 
-
 - name: Install updates
   yum: name=* state=latest
 
@@ -23,7 +22,6 @@
   yum:
     name=mysql-server
     state=latest
-  
   
 - name: Start mysqld
   service: name=mysqld state=started enabled=yes
@@ -42,7 +40,6 @@
     src: templates/my.cnf.j2
     dest: /etc/my.cnf
 
-
 - name: Restart service mysqld
   ansible.builtin.systemd:
     state: restarted
@@ -53,21 +50,18 @@
   shell: >
      mysql -uroot -e "CREATE USER 'replica'@'{{ db2 }}' IDENTIFIED BY 'replica';"
  
-
 - name: Grant previllegies
   shell: >
      mysql -uroot -e "GRANT REPLICATION SLAVE ON *.* TO 'replica'@'{{ db2 }}';"
            
-
 - name: Create database "WORDPRESS"
   shell: >
      mysql -uroot -e "CREATE DATABASE wordpress;"
 
-
 - name: Create user "worpdress"
   shell: >
-     mysql -uroot -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'wordpress';"     
-
+     mysql -uroot -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'wordpress';" 
+# wordpress'@'{{ app }}
 
 - name: Grant previllegies
   shell: >

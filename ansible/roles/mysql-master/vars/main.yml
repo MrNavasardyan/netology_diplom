@@ -1,3 +1,4 @@
 ---
 # vars file for mysql-master
 db2: "{{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}"
+app: "{{ hostvars['app.grachikn.ru']['ansible_default_ipv4']['address'] }}"
