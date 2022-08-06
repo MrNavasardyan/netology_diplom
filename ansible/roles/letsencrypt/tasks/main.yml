@@ -37,7 +37,7 @@
    
     - name: Install cert
       shell: > 
-          certbot --nginx --dry-run -n -d www.grachikn.ru -d grafana.grachikn.ru -d prometheus.grachikn.ru -d alertmanager.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
+          certbot --nginx -n -d www.grachikn.ru -d grafana.grachikn.ru -d prometheus.grachikn.ru -d alertmanager.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
 
     - name: Nginx reload
       shell: service nginx reload
