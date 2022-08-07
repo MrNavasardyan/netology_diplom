@@ -26,7 +26,6 @@
     name: php-fpm
     state: started
 
-
 - name: Create Directory for wordpress
   file:
     path: /var/www/wp
@@ -40,12 +39,23 @@
     creates: /var/www/wp
     remote_src: yes
 
-- name: Change ownership var/lib/php
+- name: Change ownership /var/www
   ansible.builtin.file:
     path: /var/www
     state: directory
     recurse: yes
     owner: nginx
+
+
+- name: Rename config
+  shell: >
+    mv /var/www/wp/wp-config-sample.php /var/www/wp/wp-config.php
+
+    
+- name: Apply WP config
+  template:
+    src: templates/wp-config.php.j2
+    dest: /var/www/wp/www.conf
 
 - name: Restart nginx
   service: name=nginx state=restarted
