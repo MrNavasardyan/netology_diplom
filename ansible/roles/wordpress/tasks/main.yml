@@ -70,7 +70,7 @@
     state: directory
     recurse: yes
     owner: nginx
-    group: nginx
+    group: root
 
 - name: Rename config
   shell: >
