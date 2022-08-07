@@ -1,8 +1,17 @@
 ---
 - name: Install PHP
   yum:
-    name=yum install php-cli php-fpm php-mysql php-json php-opcache php-mbstring php-xml php-gd php-curl
-    state=latest
+    name:
+     - php-cli 
+     - php-fpm 
+     - php-mysql 
+     - php-json 
+     - php-opcache 
+     - php-mbstring 
+     - php-xml 
+     - php-gd 
+     - php-curl
+    state: present
 
 - name: Apply PHP config
   template:
@@ -51,7 +60,7 @@
   shell: >
     mv /var/www/wp/wp-config-sample.php /var/www/wp/wp-config.php
 
-    
+
 - name: Apply WP config
   template:
     src: templates/wp-config.php.j2
