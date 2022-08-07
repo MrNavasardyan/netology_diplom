@@ -47,7 +47,7 @@
 
 - name: Extract WP into /var/www/wp
   ansible.builtin.unarchive:
-    src: /var/www/wp/{{ version }}.tar.gz
+    src: /var/www/wp/{{ version }}
     dest: /var/www/wp
 
 
