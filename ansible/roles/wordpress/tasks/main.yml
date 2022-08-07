@@ -40,13 +40,16 @@
     path: /var/www/wp
     state: directory
 
+- name: Download file and force basic auth
+  ansible.builtin.get_url:
+    url: https://wordpress.org/latest.tar.gz
+    dest: /var/www/wp
 
-- name: Download And Unzipped Wordpress
-  unarchive:
-    src: https://wordpress.org/latest.tar.gz
-    dest: /home/worpdress
-    creates: /var/www/wp
-    remote_src: yes
+- name: Extract WP into /var/www/wp
+  ansible.builtin.unarchive:
+    src: /var/www/wp/latest.tar.gz
+    dest: /var/www/wp
+
 
 - name: Change ownership /var/www
   ansible.builtin.file:
@@ -55,16 +58,15 @@
     recurse: yes
     owner: nginx
 
-
 - name: Rename config
   shell: >
     mv /var/www/wp/wp-config-sample.php /var/www/wp/wp-config.php
-
 
 - name: Apply WP config
   template:
     src: templates/wp-config.php.j2
     dest: /var/www/wp/www.conf
+
 
 - name: Restart nginx
   service: name=nginx state=restarted
