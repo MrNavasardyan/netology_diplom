@@ -40,7 +40,7 @@
     path: /var/www/wp
     state: directory
 
-- name: Download file and force basic auth
+- name: Download file wordpress
   ansible.builtin.get_url:
     url: https://wordpress.org/latest.tar.gz
     dest: /var/www/wp
@@ -61,12 +61,12 @@
 
 - name: Rename config
   shell: >
-    mv /var/www/wp/wp-config-sample.php /var/www/wp/wp-config.php
+    mv /var/www/wp/wordpress/wp-config-sample.php /var/www/wp/wp-config.php
 
 - name: Apply WP config
   template:
     src: templates/wp-config.php.j2
-    dest: /var/www/wp/www.conf
+    dest: /var/www/wp/wordpress/wp-config.php
 
 
 - name: Restart nginx
