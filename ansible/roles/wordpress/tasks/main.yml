@@ -49,6 +49,7 @@
   ansible.builtin.unarchive:
     src: /var/www/wp/{{ version }}
     dest: /var/www/wp
+    remote_src: yes
 
 
 - name: Change ownership /var/www
