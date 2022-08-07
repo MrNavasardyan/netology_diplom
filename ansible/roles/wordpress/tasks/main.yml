@@ -13,6 +13,15 @@
 - name: Install PHP
   yum:
     name:
+     - php-cli 
+     - php-fpm 
+     - php-mysql 
+     - php-json 
+     - php-opcache 
+     - php-mbstring 
+     - php-xml 
+     - php-gd 
+     - php-curl
      - php72
     state: present
 
