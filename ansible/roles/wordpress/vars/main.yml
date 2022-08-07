@@ -1,0 +1,5 @@
+---
+db_host: "{{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}"
+db_user: wordpress
+db_password: wordpress
+db_name: wordpress

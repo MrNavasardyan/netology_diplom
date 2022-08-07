@@ -60,12 +60,12 @@
 
 - name: Create user "worpdress"
   shell: >
-     mysql -uroot -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'wordpress';" 
+     mysql -uroot -e "CREATE USER 'wordpress'@'{{ app }}' IDENTIFIED BY 'wordpress';" 
 # wordpress'@'{{ app }}
 
 - name: Grant previllegies
   shell: >
-     mysql -uroot -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'worpress'@'localhost';"
+     mysql -uroot -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'worpress'@'{{ app }}';"
 
 - name: Grant previllegies
   shell: >

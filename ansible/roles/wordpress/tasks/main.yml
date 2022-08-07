@@ -1,2 +1,51 @@
 ---
+- name: Install PHP
+  yum:
+    name=yum install php-cli php-fpm php-mysql php-json php-opcache php-mbstring php-xml php-gd php-curl
+    state=latest
 
+- name: Apply PHP config
+  template:
+    src: templates/www.conf.j2
+    dest: /etc/php-fpm.d/www.conf
+
+- name: Change ownership var/lib/php
+  ansible.builtin.file:
+    path: var/lib/php
+    state: directory
+    recurse: yes
+    owner: nginx
+
+- name: Enable php-fpm
+  ansible.builtin.systemd:
+    name: php-fpm
+    enabled: yes
+
+- name: Run php-fpm
+  ansible.builtin.systemd:
+    name: php-fpm
+    state: started
+
+
+- name: Create Directory for wordpress
+  file:
+    path: /var/www/wp
+    state: directory
+
+
+- name: Download And Unzipped Wordpress
+  unarchive:
+    src: https://wordpress.org/latest.tar.gz
+    dest: /home/worpdress
+    creates: /var/www/wp
+    remote_src: yes
+
+- name: Change ownership var/lib/php
+  ansible.builtin.file:
+    path: /var/www
+    state: directory
+    recurse: yes
+    owner: nginx
+
+- name: Restart nginx
+  service: name=nginx state=restarted

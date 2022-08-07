@@ -9,28 +9,28 @@
     centos
 
 
-- hosts: db_master
-  gather_facts: false
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-       - mysql-master
+# - hosts: db_master
+#   gather_facts: false
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#        - mysql-master
 
 
 
-- hosts: db_slave
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-       - mysql-slave
+# - hosts: db_slave
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#        - mysql-slave
      
 
 - hosts: 
@@ -43,30 +43,31 @@
     centos
   roles:
      - nginx
+     - wordpress
 
-- hosts: 
-      all
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-     - node-exporter
+# - hosts: 
+#       all
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#      - node-exporter
 
-- hosts: 
-    monitoring
-  become:
-   true
-  become_user:
-   root
-  remote_user:
-    centos
-  roles:
-   - prometheus
-   - alertmanager
-   - grafana
+# - hosts: 
+#     monitoring
+#   become:
+#    true
+#   become_user:
+#    root
+#   remote_user:
+#     centos
+#   roles:
+#    - prometheus
+#    - alertmanager
+#    - grafana
 
 - hosts: 
     proxy
