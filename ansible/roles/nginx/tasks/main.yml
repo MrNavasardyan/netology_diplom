@@ -8,10 +8,6 @@
   yum:
     name=nginx
     state=latest
-  when:
-    ansible_os_family == "RedHat"
-  notify:
-    - nginx systemd
 
 - name: copy nginx config file
   copy: src=files/nginx.conf dest=/etc/nginx/
