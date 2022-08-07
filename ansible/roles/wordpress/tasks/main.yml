@@ -73,7 +73,7 @@
 
 - name: Rename config
   shell: >
-    mv /var/www/wp/wordpress/wp-config-sample.php /var/www/wp/wp-config.php
+    mv /var/www/wp/wordpress/wp-config-sample.php /var/www/wp/wordpress/wp-config.php
 
 - name: Apply WP config
   template:
