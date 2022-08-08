@@ -44,8 +44,9 @@ http {
         server {{ hostvars['gitlab.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
     }
 
-    #server {
+    server {
         listen 80;
+
         server_name gitlab.grachikn.ru www.gitlab.grachikn.ru;
         #Redirect to HTTPS
         location / {
