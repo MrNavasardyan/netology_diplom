@@ -1,10 +1,10 @@
 ---
-- name: Install EPEL Repo
+- name: (NGINX for PROXY) Install EPEL Repo
   yum:
     name=epel-release
     state=present
  
-- name: Install Nginx Web Server on RedHat Family
+- name: (NGINX for PROXY) Install Nginx Web Server on RedHat Family
   yum:
     name=nginx
     state=latest
@@ -13,10 +13,10 @@
   notify:
     - nginx systemd
 
-- name: Apply Nginx template
+- name: (NGINX for PROXY) Apply Nginx template
   template:
     src: templates/nginx.conf.v2.j2
     dest: /etc/nginx/nginx.conf
            
-- name: Restart nginx
+- name: (NGINX for PROXY) Restart nginx
   service: name=nginx state=restarted

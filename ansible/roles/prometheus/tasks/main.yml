@@ -1,11 +1,11 @@
 ---
-- name: Create User prometheus
+- name: (PROMETHEUS) Create User prometheus
   user:
     name: prometheus
     create_home: no
     shell: /bin/false
  
-- name: Create directories for prometheus
+- name: (PROMETHEUS) Create directories for prometheus
   file:
     path: "{{ item }}"
     state: directory
@@ -16,14 +16,14 @@
     - '/etc/prometheus'
     - '/var/lib/prometheus'
  
-- name: Download And Unzipped Prometheus
+- name: (PROMETHEUS) Download And Unzipped Prometheus
   unarchive:
     src: https://github.com/prometheus/prometheus/releases/download/v{{ prom_version }}/prometheus-{{ prom_version }}.linux-amd64.tar.gz
     dest: /tmp/prometheus
     creates: /tmp/prometheus/prometheus-{{ prom_version }}.linux-amd64
     remote_src: yes
  
-- name: Copy Bin Files From Unzipped to Prometheus
+- name: (PROMETHEUS) Copy Bin Files From Unzipped to Prometheus
   copy:
     src: /tmp/prometheus/prometheus-{{ prom_version }}.linux-amd64/{{ item }}
     dest: /usr/local/bin/
@@ -33,7 +33,7 @@
     group: prometheus
   loop: [ 'prometheus', 'promtool' ]
  
-- name: Copy Conf Files From Unzipped to Prometheus
+- name: (PROMETHEUS) Copy Conf Files From Unzipped to Prometheus
   copy:
     src: /tmp/prometheus/prometheus-{{ prom_version }}.linux-amd64/{{ item }}
     dest: /etc/prometheus/
@@ -43,19 +43,19 @@
     group: prometheus
   loop: [ 'console_libraries', 'consoles', 'prometheus.yml' ]
  
-- name: Create File for Prometheus Systemd
+- name: (PROMETHEUS) Create File for Prometheus Systemd
   template:
     src=templates/prometheus.service
     dest=/etc/systemd/system/
   notify:
     - systemd reload
 
-- name: Apply Prometheus template
+- name: (PROMETHEUS) Apply Prometheus template
   template:
     src: prometheus.yaml.j2
     dest: /etc/prometheus/prometheus.yml
 
-- name: Systemctl Prometheus Start
+- name: (PROMETHEUS) Systemctl Prometheus Start
   systemd:
     name: prometheus
     state: started

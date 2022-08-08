@@ -1,32 +1,32 @@
-    - name: Install snapd
+    - name: (LETSENCRYPT) Install snapd
       yum: name=snapd state=latest
     
-    - name: Enable systemd
+    - name: (LETSENCRYPT) Enable systemd
       shell: >
         systemctl enable --now snapd.socket
     
-    - name: Create symbolic link
+    - name: (LETSENCRYPT) Create symbolic link
       shell: >
         ln -s /var/lib/snapd/snap /snap    
 
-    - name: sudo snap install core with error
+    - name: (LETSENCRYPT) sudo snap install core with error
       shell: > 
           sudo snap install core; sudo snap refresh core
       ignore_errors: True
 
-    - name: sudo snap install core one more time
+    - name: (LETSENCRYPT) sudo snap install core one more time
       shell: > 
           sudo snap install core; sudo snap refresh core
 
-    - name: ln -s /snap/bin/certbot /usr/bin/certbot
+    - name: (LETSENCRYPT) ln -s /snap/bin/certbot /usr/bin/certbot
       shell: > 
           ln -s /snap/bin/certbot /usr/bin/certbot
 
-    - name: Install certbot snap with option --classic
+    - name: (LETSENCRYPT) Install certbot snap with option --classic
       shell: >
            snap install --classic certbot
    
-    - name: Install cert
+    - name: (LETSENCRYPT) Install cert for my domains
       shell: > 
           certbot --nginx -n -d www.grachikn.ru -d grafana.grachikn.ru -d prometheus.grachikn.ru -d alertmanager.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
 # -d gitlab.grachikn.ru

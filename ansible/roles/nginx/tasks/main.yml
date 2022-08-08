@@ -1,19 +1,19 @@
 ---
-- name: Install EPEL Repo
+- name: (NGINX for APP) Install EPEL Repo
   yum:
     name=epel-release
     state=present
 
     
-- name: Install Nginx Web Server on RedHat Family
+- name: (NGINX for APP) Install Nginx Web Server on RedHat Family
   yum:
     name=nginx
     state=latest
 
-- name: Copy nginx config file
+- name: (NGINX for APP) Copy nginx config file
   copy: src=files/nginx.conf dest=/etc/nginx/
           
-- name: Restart nginx
+- name: (NGINX for APP) Restart nginx
   service: name=nginx state=restarted
 
 

@@ -1,67 +1,67 @@
-- name: Show me var1
+- name:  (MySQL slave) Show me var1
   debug: msg="{{ hostvars['db01.grachikn.ru']['myvar1'] }}"
 
-- name: Show me var2
+- name: (MySQL slave) Show me var2
   debug: msg="{{ hostvars['db01.grachikn.ru']['myvar2'] }}"
 
-- name: Create a directory for MySQL
+- name: (MySQL slave) Create a directory for MySQL
   ansible.builtin.file:
     path: /home/mysql
     state: directory
 
-- name: Download file MySQL
+- name: (MySQL slave) Download file MySQL
   ansible.builtin.get_url:
     url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
     dest: /home/mysql
    
-- name: rpm MySQL
+- name: (MySQL slave) rpm MySQL
   command: rpm -ivh /home/mysql/mysql-community-release-el7-5.noarch.rpm
   ignore_errors: True
 
 
-- name: Install updates
+- name: (MySQL slave) Install updates
   yum: name=* state=latest
 
-- name: Install MySQL
+- name: (MySQL slave) Install MySQL
   yum:
     name=mysql-server
     state=latest
 
-- name: Start mysqld
+- name: (MySQL slave) Start mysqld
   service: name=mysqld state=started enabled=yes
     
-- name: Check version
+- name: (MySQL slave) Check version
   ansible.builtin.shell: > 
       mysql -uroot -e 'SELECT version();'
   register: version
 
-- name: PRINT MySQL version
+- name: (MySQL slave) PRINT MySQL version
   debug:
        var: version.stdout_lines[1]
 
-- name: Apply MySQL config
+- name: (MySQL slave) Apply MySQL config
   template:
     src: templates/my.cnf.j2
     dest: /etc/my.cnf
 
-- name: Restart service mysqld
+- name: (MySQL slave) Restart service mysqld
   ansible.builtin.systemd:
     state: restarted
     daemon_reload: yes
     name: mysqld
 
-- name: Create database "WORDPRESS"
+- name: (MySQL slave) Create database "WORDPRESS"
   shell: >
      mysql -uroot -e "CREATE DATABASE wordpress;"
      
-- name: Exec cmd Stop slave
+- name: (MySQL slave) Exec cmd Stop slave
   shell: >
      mysql -uroot -e "STOP SLAVE;"
 
-- name: Exec "CHANGE MASTER TO MASTER_HOST"
+- name: (MySQL slave) Exec "CHANGE MASTER TO MASTER_HOST"
   shell: >
      mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ db1 }}', MASTER_USER='replica', MASTER_PASSWORD='replica', MASTER_LOG_FILE = '{{ myvar1 }}', MASTER_LOG_POS = {{ myvar2 }};"
 
-- name: Exec "CHANGE MASTER TO MASTER_HOST"
+- name: (MySQL slave) Exec "CHANGE MASTER TO MASTER_HOST"
   shell: >
      mysql -uroot -e "START SLAVE"
