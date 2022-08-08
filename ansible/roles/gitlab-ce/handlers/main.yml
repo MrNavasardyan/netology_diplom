@@ -1,2 +1,6 @@
 ---
 # handlers file for gitlab-ce
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded

@@ -1,0 +1,31 @@
+---
+- name: (GITLAB-CE) Install prerequisites
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - curl
+    - perl
+    - policycoreutils-python
+    - openssh-server
+
+- name: (GITLAB-CE) Check if GitLab-CE is already installed
+  stat:
+    path: /etc/gitlab
+  register: gitlab
+
+- name: (GITLAB-CE) Download GitLab-CE script
+  get_url:
+    url: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.rpm.sh
+    dest: /tmp/gitlab-ee.sh
+  when: not gitlab.stat.exists
+
+- name: (GITLAB-CE) Execute GitLab-CE CentOS script
+  command: /bin/bash /tmp/gitlab-ee.sh
+  when: not gitlab.stat.exists
+
+- name: (GITLAB-CE) Install GitLab Community Edition
+  yum:
+    name: gitlab-ee
+    state: latest
+  register: gitlabupdate

@@ -1,0 +1,43 @@
+---
+- name: (GITLAB-CE) Install EPEL Repo
+  yum:
+    name=epel-release
+    state=present
+
+    
+- name: (GITLAB-CE) Install Nginx Web Server on RedHat Family
+  yum:
+    name=nginx
+    state=latest
+
+- name: (GITLAB-CE) Copy nginx config file
+  copy: src=files/nginx.conf dest=/etc/nginx/
+          
+- name: (GITLAB-CE) Restart nginx
+  service: name=nginx state=restarted
+
+- name: (GITLAB-CE) Change port of Gitlab-CE
+  lineinfile:
+    path: /etc/gitlab/gitlab.rb
+    regexp: '^external_url'
+    backrefs: yes
+    line: "external_url 'http://127.0.0.1:{{ gitlab_port }}'"
+    state: present
+  register: gitlabport
+
+- name: (GITLAB-CE) Reconfigure Gitlab-CE
+  command: gitlab-ctl reconfigure
+  when: gitlabport|changed
+
+
+- name: (GITLAB-CE) Check if the GITLAB-CE hostname can be solved
+  command: dig {{ gitlab_hostname }} +short
+  register: dig
+  changed_when: false
+
+
+- name: (GITLAB-CE) Start Nginx
+  service:
+    name: nginx
+    state: started
+  changed_when: false

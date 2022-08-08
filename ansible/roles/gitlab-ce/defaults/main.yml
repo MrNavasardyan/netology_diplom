@@ -1,2 +1,4 @@
 ---
 # defaults file for gitlab-ce
+gitlab_hostname: gitlab.grachikn.ru
+gitlab_port: 8082
