@@ -13,6 +13,7 @@
 - name: Install PHP
   yum:
     name:
+     - epel-release
      - php-cli 
      - php-fpm 
      - php-mysql 
@@ -22,6 +23,7 @@
      - php-xml 
      - php-gd 
      - php-curl
+     
     #  - php72
     state: present
 
