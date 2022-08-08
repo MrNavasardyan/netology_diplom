@@ -28,8 +28,8 @@
    
     - name: Install cert
       shell: > 
-          certbot --nginx -n -d www.grachikn.ru -d grafana.grachikn.ru -d prometheus.grachikn.ru -d gitlab.grachikn.ru -d alertmanager.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
-
+          certbot --nginx -n -d www.grachikn.ru -d grafana.grachikn.ru -d prometheus.grachikn.ru -d alertmanager.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
+# -d gitlab.grachikn.ru
     - name: Nginx reload
       shell: service nginx reload
       
