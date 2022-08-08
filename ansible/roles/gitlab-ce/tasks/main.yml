@@ -3,4 +3,3 @@
 - include_tasks: gitlab-ce.yml
 
 - include_tasks: nginx.yml
-  when: nginx.stat.exists
