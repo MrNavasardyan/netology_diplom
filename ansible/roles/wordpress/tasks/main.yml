@@ -22,7 +22,7 @@
      - php-xml 
      - php-gd 
      - php-curl
-     - php72
+    #  - php72
     state: present
 
 - name: Apply PHP config
