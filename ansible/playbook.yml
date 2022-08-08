@@ -18,8 +18,8 @@
 
   - name: Copy SE config
     template:
-    src: templates/conf.j2
-    dest: /etc/selinux/config
+      src: templates/conf.j2
+      dest: /etc/selinux/config
       
 
 
