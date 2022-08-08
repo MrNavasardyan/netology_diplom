@@ -20,7 +20,3 @@
            
 - name: Restart nginx
   service: name=nginx state=restarted
-
-
-- name: set sebook
-  shell: 'setsebool -P httpd_can_network_connect 1'
