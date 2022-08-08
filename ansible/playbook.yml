@@ -93,13 +93,13 @@
     - nginx-proxy
     # - letsencrypt
 
-# - hosts: 
-#     gitlab
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#     - gitlab-ce
+- hosts: 
+    gitlab
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+    - gitlab-ce
