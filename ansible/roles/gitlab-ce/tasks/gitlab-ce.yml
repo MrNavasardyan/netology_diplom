@@ -14,18 +14,21 @@
     path: /etc/gitlab
   register: gitlab
 
+- name: (GITLAB-CE) Enaable sshd
+  ansible.builtin.systemd:
+    name: sshd
+    enabled: yes
+    masked: no
+
+- name: (GITLAB-CE) Start sshd
+  ansible.builtin.systemd:
+    state: started
+    name: sshd  
+
 - name: (GITLAB-CE) Download GitLab-CE script
-  get_url:
-    url: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.rpm.sh
-    dest: /tmp/gitlab-ee.sh
-  when: not gitlab.stat.exists
+  shell: >
+    curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash
 
 - name: (GITLAB-CE) Execute GitLab-CE CentOS script
-  command: /bin/bash /tmp/gitlab-ee.sh
-  when: not gitlab.stat.exists
-
-- name: (GITLAB-CE) Install GitLab Community Edition
-  yum:
-    name: gitlab-ee
-    state: latest
-  register: gitlabupdate
+  shell: >
+    EXTERNAL_URL="{{ gitlab_hostname }}" yum install -y gitlab-ce
