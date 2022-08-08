@@ -20,33 +20,9 @@
     template:
       src: templates/conf.j2
       dest: /etc/selinux/config
-      
-
-# - hosts: db_master
-#   gather_facts: false
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#        - mysql-master
-
-
-# - hosts: db_slave
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#        - mysql-slave
-     
 
 # - hosts: 
-#       app
+#       all
 #   become:
 #     true
 #   become_user:
@@ -54,11 +30,11 @@
 #   remote_user:
 #     centos
 #   roles:
-#      - nginx
-#      - wordpress
+#      - node-exporter
+      
 
-- hosts: 
-      all
+- hosts: db_master
+  gather_facts: false
   become:
     true
   become_user:
@@ -66,20 +42,44 @@
   remote_user:
     centos
   roles:
-     - node-exporter
+       - mysql-master
 
-- hosts: 
-    monitoring
+
+- hosts: db_slave
   become:
-   true
+    true
   become_user:
-   root
+    root
   remote_user:
     centos
   roles:
-   - prometheus
-   - alertmanager
-   - grafana
+       - mysql-slave
+     
+
+- hosts: 
+      app
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+     - nginx
+     - wordpress
+
+# - hosts: 
+#     monitoring
+#   become:
+#    true
+#   become_user:
+#    root
+#   remote_user:
+#     centos
+#   roles:
+#    - prometheus
+#    - alertmanager
+#    - grafana
 
 - hosts: 
     proxy
