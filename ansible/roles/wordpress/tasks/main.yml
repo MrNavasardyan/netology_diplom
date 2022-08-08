@@ -68,11 +68,10 @@
 
 - name: Change ownership /var/www
   ansible.builtin.file:
-    path: /var/www
+    path: /var/www/wp
     state: directory
     recurse: yes
     owner: nginx
-    group: root
 
 - name: Rename config
   shell: >
