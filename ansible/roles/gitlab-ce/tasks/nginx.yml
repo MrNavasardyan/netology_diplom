@@ -9,9 +9,6 @@
   yum:
     name=nginx
     state=latest
-
-- name: (GITLAB-CE) Copy nginx config file
-  copy: src=files/nginx.conf dest=/etc/nginx/
           
 - name: (GITLAB-CE) Restart nginx
   service: name=nginx state=restarted
@@ -31,10 +28,14 @@
 
 
 - name: (GITLAB-CE) Check if the GITLAB-CE hostname can be solved
-  command: dig {{ gitlab_hostname }} +short
+  command: dig {{ gitlab_hostname }} + short
   register: dig
   changed_when: false
 
+- name: (NGINX for PROXY) Apply Nginx template
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
 
 - name: (GITLAB-CE) Start Nginx
   service:
