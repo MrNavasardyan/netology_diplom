@@ -65,10 +65,5 @@
 
 - name: (GITLAB-CE) Reconfigure Gitlab-CE
   command: gitlab-ctl reconfigure
-
-- name: (NGINX for PROXY) Apply Nginx template
-  template:
-    src: templates/nginx.conf.j2
-    dest: /etc/nginx/nginx.conf
   notify:
     - nginx systemd
