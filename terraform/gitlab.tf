@@ -3,8 +3,8 @@ resource "yandex_compute_instance" "gitlab" {
  hostname ="gitlab.${var.my_domain}"
 
  resources {
-       cores = "2"
-       memory = "2"
+       cores = "8"
+       memory = "8"
  }
 
  boot_disk {
