@@ -31,4 +31,4 @@
 
 - name: (GITLAB-CE) Execute GitLab-CE CentOS script
   shell: >
-    EXTERNAL_URL="{{ gitlabhostname }}" yum install -y gitlab-ce
+    EXTERNAL_URL="{{ hostvars['gitlab.grachikn.ru']['ansible_nodename'] }}" yum install -y gitlab-ce
