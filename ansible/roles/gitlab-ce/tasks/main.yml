@@ -47,6 +47,13 @@
   notify:
     - nginx systemd
 
+- name: (NGINX for PROXY) Apply Nginx template
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+  notify:
+    - nginx systemd
+
 - name: (GITLAB-CE) Change port of Gitlab-CE
   lineinfile:
     path: /etc/gitlab/gitlab.rb
@@ -58,13 +65,6 @@
 
 - name: (GITLAB-CE) Reconfigure Gitlab-CE
   command: gitlab-ctl reconfigure
-  when: gitlabport|changed
-
-
-- name: (GITLAB-CE) Check if the GITLAB-CE hostname can be solved
-  command: dig {{ gitlab_hostname }} + short
-  register: dig
-  changed_when: false
 
 - name: (NGINX for PROXY) Apply Nginx template
   template:
