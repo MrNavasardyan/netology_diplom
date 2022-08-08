@@ -9,7 +9,7 @@ alerting:
   alertmanagers:
     - static_configs:
         - targets:
-          - alertmanager:9093
+          - localhost:9093
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
@@ -26,4 +26,4 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['{{ hostvars['app.grachikn.ru']['ansible_default_ipv4']['address'] }}:9100','{{ hostvars['db01.grachikn.ru']['ansible_default_ipv4']['address'] }}:9100','{{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}:9100','{{ hostvars['gitlab.grachikn.ru']['ansible_default_ipv4']['address']}}:9100','localhost:9100']
+      - targets: ['{{ hostvars['app.grachikn.ru']['ansible_default_ipv4']['address'] }}:9100','{{ hostvars['db01.grachikn.ru']['ansible_default_ipv4']['address'] }}:9100','{{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}:9100','{{ hostvars['gitlab.grachikn.ru']['ansible_default_ipv4']['address']}}:9100','{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}']
