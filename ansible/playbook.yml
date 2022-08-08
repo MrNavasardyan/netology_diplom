@@ -7,6 +7,20 @@
     root
   remote_user:
     centos
+  tasks:
+    - name: Turn off setsebool 
+      shell: > 
+        setsebool -P httpd_can_network_connect 1
+    - name: Turn off setsebool 
+      shell: > 
+        setenforce 0
+    - name: Copy SE config
+      template:
+      src: templates/config.j2
+      dest: /etc/selinux/config
+      
+
+
 
 
 # - hosts: db_master
