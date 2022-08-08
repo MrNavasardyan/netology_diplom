@@ -81,14 +81,14 @@
    - alertmanager
    - grafana
 
-# - hosts: 
-#     proxy
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#     - nginx-proxy
+- hosts: 
+    proxy
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+    - nginx-proxy
     # - letsencrypt
