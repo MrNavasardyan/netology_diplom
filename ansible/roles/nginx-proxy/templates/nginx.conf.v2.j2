@@ -47,10 +47,10 @@ http {
     server {
         listen 80;
 
-        server_name gitlab.grachikn.ru www.gitlab.grachikn.ru;
+        server_name gitlab.grachikn.ru:8088 www.gitlab.grachikn.ru:8088;
         #Redirect to HTTPS
         location / {
-            proxy_pass http://gitlab:8088;
+            proxy_pass http://gitlab;
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Real-IP $remote_addr;
