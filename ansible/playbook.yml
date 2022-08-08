@@ -82,6 +82,17 @@
 #    - grafana
 
 - hosts: 
+    gitlab
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+    - gitlab-ce
+
+- hosts: 
     proxy
   become:
     true
@@ -92,14 +103,3 @@
   roles:
     - nginx-proxy
     # - letsencrypt
-
-- hosts: 
-    gitlab
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-    - gitlab-ce
