@@ -18,7 +18,7 @@
     path: /etc/gitlab/gitlab.rb
     regexp: '^external_url'
     backrefs: yes
-    line: "external_url 'http://127.0.0.1:{{ gitlab_port }}'"
+    line: "external_url 'http://127.0.0.1:{{ gitlabport }}'"
     state: present
   register: gitlabport
 
