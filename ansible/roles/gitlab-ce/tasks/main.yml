@@ -1,5 +1,81 @@
 ---
-# tasks file for gitlab-ce
-- include_tasks: gitlab-ce.yml
+- name: (GITLAB-CE) Install prerequisites
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - curl
+    - perl
+    - policycoreutils-python
+    - openssh-server
 
-- include_tasks: nginx.yml
+- name: (GITLAB-CE) Check if GitLab-CE is already installed
+  stat:
+    path: /etc/gitlab
+  register: gitlab
+
+- name: (GITLAB-CE) Enaable sshd
+  ansible.builtin.systemd:
+    name: sshd
+    enabled: yes
+    masked: no
+
+- name: (GITLAB-CE) Start sshd
+  ansible.builtin.systemd:
+    state: started
+    name: sshd  
+
+- name: (GITLAB-CE) Download GitLab-CE script
+  shell: >
+    curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash
+
+- name: (GITLAB-CE) Execute GitLab-CE CentOS script
+  shell: >
+    EXTERNAL_URL="{{ hostvars['gitlab.grachikn.ru']['ansible_nodename'] }}" yum install -y gitlab-ce
+
+- name: (GITLAB-CE) Install EPEL Repo
+  yum:
+    name=epel-release
+    state=present
+    
+- name: (GITLAB-CE) Install Nginx Web Server on RedHat Family
+  yum:
+    name=nginx
+    state=latest
+  when:
+    ansible_os_family == "RedHat"
+  notify:
+    - nginx systemd
+          
+- name: (GITLAB-CE) Restart nginx
+  service: name=nginx state=restarted
+
+- name: (GITLAB-CE) Change port of Gitlab-CE
+  lineinfile:
+    path: /etc/gitlab/gitlab.rb
+    regexp: '^external_url'
+    backrefs: yes
+    line: "external_url 'http://127.0.0.1:8082'"
+    state: present
+  register: gitlabport
+
+- name: (GITLAB-CE) Reconfigure Gitlab-CE
+  command: gitlab-ctl reconfigure
+  when: gitlabport|changed
+
+
+- name: (GITLAB-CE) Check if the GITLAB-CE hostname can be solved
+  command: dig {{ gitlab_hostname }} + short
+  register: dig
+  changed_when: false
+
+- name: (NGINX for PROXY) Apply Nginx template
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+
+- name: (GITLAB-CE) Start Nginx
+  service:
+    name: nginx
+    state: started
+  changed_when: false
