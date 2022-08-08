@@ -26,4 +26,9 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['{{ hostvars['app.grachikn.ru']['ansible_default_ipv4']['address'] }}:9100','{{ hostvars['db01.grachikn.ru']['ansible_default_ipv4']['address'] }}:9100','{{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}:9100','{{ hostvars['gitlab.grachikn.ru']['ansible_default_ipv4']['address']}}:9100','{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}']
+
+       - targets: ['{{ hostvars['app.grachikn.ru']['ansible_nodename'] }}:9100','{{ hostvars['db01.grachikn.ru']
+       ['ansible_nodename'] }}:9100','{{ hostvars['db02.grachikn.ru']['ansible_nodename'] }}:9100','{{ hostvars['gitlab.grachikn.ru']['ansible_nodename']}}:9100','{{ hostvars['monitoring.grachikn.ru']['ansible_nodename'] }}:9100']
+
+
+      #- targets: ['{{ hostvars['app.grachikn.ru']['ansible_default_ipv4']['address'] }}:9100','{{ hostvars['db01.grachikn.ru']['ansible_default_ipv4']['address'] }}:9100','{{ hostvars['db02.grachikn.ru']['ansible_default_ipv4']['address'] }}:9100','{{ hostvars['gitlab.grachikn.ru']['ansible_default_ipv4']['address']}}:9100','{{ hostvars['monitoring.grachikn.ru']['ansible_default_ipv4']['address'] }}:9100']
