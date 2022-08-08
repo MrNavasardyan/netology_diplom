@@ -22,10 +22,10 @@ server {
     add_header X-XSS-Protection "1; mode=block";
     add_header X-Content-Type-Options nosniff;
 
-    server_name gitlab.grachikn.ru www.gitlab.grachikn.ru;
+    server_name gitlab.grachikn.ru;
 
     # Redirect to HTTPS
-    return 301 https://$host$request_uri;
+    # return 301 https://$host$request_uri;
 
     location / {
         proxy_pass http://127.0.0.1:8082/;

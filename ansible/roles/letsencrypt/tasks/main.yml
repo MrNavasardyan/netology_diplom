@@ -28,8 +28,8 @@
    
     - name: (LETSENCRYPT) Install cert for my domains
       shell: > 
-          certbot --nginx -n -d www.grachikn.ru -d grafana.grachikn.ru -d prometheus.grachikn.ru -d alertmanager.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
-# -d gitlab.grachikn.ru
+          certbot --nginx -n -d www.grachikn.ru -d grafana.grachikn.ru -d prometheus.grachikn.ru -d gitlab.grachikn.ru -d alertmanager.grachikn.ru -m ngrachik@mail.ru --redirect --agree-tos
+# 
     - name: Nginx reload
       shell: service nginx reload
       

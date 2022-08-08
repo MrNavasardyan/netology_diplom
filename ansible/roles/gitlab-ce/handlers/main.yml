@@ -1,10 +1,5 @@
 ---
 # handlers file for gitlab-ce
-- name: reload nginx
-  service:
-    name: nginx
-    state: reloaded
-
 - name: nginx systemd
   systemd:
     name: nginx
