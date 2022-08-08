@@ -18,7 +18,7 @@
 
   - name: Copy SE config
     template:
-    src: templates/config.j2
+    src: templates/conf.j2
     dest: /etc/selinux/config
       
 
