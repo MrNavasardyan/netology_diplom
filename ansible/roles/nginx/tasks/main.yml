@@ -10,15 +10,15 @@
     name=nginx
     state=latest
 
-- name: copy nginx config file
+- name: Copy nginx config file
   copy: src=files/nginx.conf dest=/etc/nginx/
 
 
-- name: set sebook
+- name: Set sebook
   shell: > 
     setsebool -P httpd_can_network_connect 1
 
-- name: set sebook
+- name: Set setenforce 
   shell: > 
     setenforce 0
 
