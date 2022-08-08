@@ -1,4 +1,9 @@
 ---
+- name: (GITLAB-CE) Install EPEL Repo
+  yum:
+    name=epel-release
+    state=present
+
 - name: (GITLAB-CE) Install prerequisites
   yum:
     name: "{{ item }}"
@@ -8,11 +13,6 @@
     - perl
     - policycoreutils-python
     - openssh-server
-
-- name: (GITLAB-CE) Check if GitLab-CE is already installed
-  stat:
-    path: /etc/gitlab
-  register: gitlab
 
 - name: (GITLAB-CE) Enaable sshd
   ansible.builtin.systemd:
@@ -31,13 +31,8 @@
 
 - name: (GITLAB-CE) Execute GitLab-CE CentOS script
   shell: >
-    EXTERNAL_URL="{{ hostvars['gitlab.grachikn.ru']['ansible_nodename'] }}" yum install -y gitlab-ce
-
-- name: (GITLAB-CE) Install EPEL Repo
-  yum:
-    name=epel-release
-    state=present
-    
+    EXTERNAL_URL="http://{{ hostvars['gitlab.grachikn.ru']['ansible_nodename'] }}" yum install -y gitlab-ce
+  
 - name: (GITLAB-CE) Install Nginx Web Server on RedHat Family
   yum:
     name=nginx
@@ -47,23 +42,10 @@
   notify:
     - nginx systemd
 
-- name: (NGINX for PROXY) Apply Nginx template
+- name: (GITLAB-CE) Apply Nginx template
   template:
     src: templates/nginx.conf.j2
     dest: /etc/nginx/nginx.conf
   notify:
     - nginx systemd
 
-- name: (GITLAB-CE) Change port of Gitlab-CE
-  lineinfile:
-    path: /etc/gitlab/gitlab.rb
-    regexp: '^external_url'
-    backrefs: yes
-    line: "external_url 'http://127.0.0.1:8082'"
-    state: present
-  register: gitlabport
-
-- name: (GITLAB-CE) Reconfigure Gitlab-CE
-  command: gitlab-ctl reconfigure
-  notify:
-    - nginx systemd
