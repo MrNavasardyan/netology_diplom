@@ -41,13 +41,13 @@ http {
 
     #GITLAB
     upstream gitlab {
-        server {{ hostvars['gitlab.grachikn.ru']['ansible_default_ipv4']['address'] }}:80;
+        server {{ hostvars['gitlab.grachikn.ru']['ansible_default_ipv4']['address'] }}:8088;
     }
 
     server {
         listen 80;
 
-        server_name gitlab.grachikn.ru:8088 www.gitlab.grachikn.ru:8088;
+        server_name gitlab.grachikn.ru www.gitlab.grachikn.ru;
         #Redirect to HTTPS
         location / {
             proxy_pass http://gitlab;

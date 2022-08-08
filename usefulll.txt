@@ -19,3 +19,7 @@ https://sidmid.ru/ansible-lint-%d0%b4%d0%bb%d1%8f-%d1%81%d0%ba%d0%b0%d0%bd%d0%b8
 https://baks.dev/article/wordpress/how-to-install-wordpress-with-nginx-on-centos-7
 
 https://docs.ansible.com/ansible/latest/collections/ansible/builtin/get_url_module.html#examples
+
+https://www.dmosk.ru/miniinstruktions.php?mini=gitlab-runner-web
+
+https://www.dmosk.ru/miniinstruktions.php?mini=gitlab-centos
