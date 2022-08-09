@@ -6,7 +6,7 @@
 
 - name: (RUNNER) Install gitlab-runner
   yum:
-    name: "{{ item }}"
+    name: gitlab-runner
     state: latest
 
 - name: (RUNNER) Enable runner
