@@ -1,8 +1,8 @@
 ---
-- name: (NGINX for PROXY) Install EPEL Repo
-  yum:
-    name=epel-release
-    state=present
+# - name: (NGINX for PROXY) Install EPEL Repo
+#   yum:
+#     name=epel-release
+#     state=present
  
 - name: (NGINX for PROXY) Install Nginx Web Server on RedHat Family
   yum:

@@ -1,9 +1,4 @@
 ---
-# - name: (GITLAB-CE) Install EPEL Repo
-#   yum:
-#     name=epel-release
-#     state=present
-
 - name: (GITLAB-CE) Install prerequisites
   yum:
     name: "{{ item }}"
@@ -14,7 +9,7 @@
     - policycoreutils-python
     - openssh-server
 
-- name: (GITLAB-CE) Enaable sshd
+- name: (GITLAB-CE) Enable sshd
   ansible.builtin.systemd:
     name: sshd
     enabled: yes
@@ -25,11 +20,11 @@
     state: started
     name: sshd  
 
-- name: (GITLAB-CE) Download GitLab-CE script
+- name: (GITLAB-CE) Get REPO for GitLab-CE
   shell: >
     curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash
 
-- name: (GITLAB-CE) Execute GitLab-CE CentOS script
+- name: (GITLAB-CE) Install GitLab-CE CentOS
   shell: >
     EXTERNAL_URL="http://{{ hostvars['gitlab.grachikn.ru']['ansible_nodename'] }}:8088" yum install -y gitlab-ce
 

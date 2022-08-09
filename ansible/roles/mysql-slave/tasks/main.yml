@@ -1,9 +1,3 @@
-- name:  (MySQL slave) Show me var1
-  debug: msg="{{ hostvars['db01.grachikn.ru']['myvar1'] }}"
-
-- name: (MySQL slave) Show me var2
-  debug: msg="{{ hostvars['db01.grachikn.ru']['myvar2'] }}"
-
 - name: (MySQL slave) Create a directory for MySQL
   ansible.builtin.file:
     path: /home/mysql
@@ -62,6 +56,6 @@
   shell: >
      mysql -uroot -e "CHANGE MASTER TO MASTER_HOST='{{ db1 }}', MASTER_USER='replica', MASTER_PASSWORD='replica', MASTER_LOG_FILE = '{{ myvar1 }}', MASTER_LOG_POS = {{ myvar2 }};"
 
-- name: (MySQL slave) Exec "CHANGE MASTER TO MASTER_HOST"
+- name: (MySQL slave) Exec "START SLAVE"
   shell: >
      mysql -uroot -e "START SLAVE"
