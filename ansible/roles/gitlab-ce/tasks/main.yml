@@ -1,8 +1,8 @@
 ---
-- name: (GITLAB-CE) Install EPEL Repo
-  yum:
-    name=epel-release
-    state=present
+# - name: (GITLAB-CE) Install EPEL Repo
+#   yum:
+#     name=epel-release
+#     state=present
 
 - name: (GITLAB-CE) Install prerequisites
   yum:

@@ -87,7 +87,8 @@
   remote_user:
     centos
   roles:
-    - gitlab-ce
+    # - gitlab-ce
+    - runner
 
 - hosts: 
     proxy
