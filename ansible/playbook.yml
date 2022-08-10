@@ -36,39 +36,39 @@
      - node-exporter
       
 
-- hosts: db_master
-  gather_facts: false
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-       - mysql-master
+# - hosts: db_master
+#   gather_facts: false
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#        - mysql-master
 
 
-- hosts: db_slave
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-       - mysql-slave
+# - hosts: db_slave
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#        - mysql-slave
      
-- hosts: 
-      app
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-     - nginx
-     - wordpress
+# - hosts: 
+#       app
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#      - nginx
+#      - wordpress
 
 - hosts: 
     monitoring
@@ -83,17 +83,17 @@
    - alertmanager
    - grafana
 
-- hosts: 
-    gitlab
-  become:
-    true
-  become_user:
-    root
-  remote_user:
-    centos
-  roles:
-    - gitlab-ce
-    - runner
+# - hosts: 
+#     gitlab
+#   become:
+#     true
+#   become_user:
+#     root
+#   remote_user:
+#     centos
+#   roles:
+#     - gitlab-ce
+#     - runner
 
 - hosts: 
     proxy
@@ -105,4 +105,4 @@
     centos
   roles:
     - nginx-proxy
-    - letsencrypt
+    # - letsencrypt
