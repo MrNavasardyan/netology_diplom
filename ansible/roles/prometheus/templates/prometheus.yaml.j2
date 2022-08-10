@@ -22,7 +22,7 @@ scrape_configs:
     static_configs:
 
        - targets: ['{{ hostvars['app.grachikn.ru']['ansible_nodename'] }}:9100','{{ hostvars['db01.grachikn.ru']
-       ['ansible_nodename'] }}:9100','{{ hostvars['db02.grachikn.ru']['ansible_nodename'] }}:9100','{{ hostvars['gitlab.grachikn.ru']['ansible_nodename']}}:9100','{{ hostvars['monitoring.grachikn.ru']['ansible_nodename'] }}:9100']
+       ['ansible_nodename'] }}:9100','{{ hostvars['db02.grachikn.ru']['ansible_nodename'] }}:9100','{{ hostvars['gitlab.grachikn.ru']['ansible_nodename']}}:9100','{{ hostvars['monitoring.grachikn.ru']['ansible_nodename'] }}:9100','{{ hostvars['runner.grachikn.ru']['ansible_nodename'] }}:9100']
 
   - job_name: "prometheus"
     static_configs:
