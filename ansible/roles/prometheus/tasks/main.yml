@@ -54,6 +54,9 @@
   template:
     src: prometheus.yaml.j2
     dest: /etc/prometheus/prometheus.yml
+ 
+- name: (PROMETHEUS) Copy alert_rules
+  copy: src=files/alert_rules dest=/etc/prometheus/
 
 - name: (PROMETHEUS) Systemctl Prometheus Start
   systemd:
