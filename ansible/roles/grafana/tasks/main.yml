@@ -2,7 +2,7 @@
 # tasks file for grafana
 - name: (GRAFANA) Install Grafana Web Server on RedHat Family
   yum:
-    name=http://mirror.centos.org/altarch/7/updates/aarch64/Packages/pcp-webapp-grafana-4.3.2-13.el7_9.noarch.rpm
+    name=https://grafanarel.s3.amazonaws.com/builds/grafana-4.6.0-1.x86_64.rpm
     state=present
 
 - name: (GRAFANA) Start service grafana-server, if not started
