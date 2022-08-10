@@ -2,14 +2,11 @@ resource "yandex_compute_instance" "runner" {
  name = "runner"
  hostname ="runner.${var.my_domain}"
 
-#  resources {
-#        cores = "4"
-#        memory = "4"
-#  }
  resources {
-       cores = "2"
-       memory = "2"
+       cores = "4"
+       memory = "4"
  }
+
 
  boot_disk {
    initialize_params {

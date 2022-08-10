@@ -3,14 +3,9 @@ resource "yandex_compute_instance" "my-domain" {
  hostname ="${var.my_domain}"
 
  resources {
-       cores = "2"
-       memory = "2"
+       cores = "4"
+       memory = "4"
  }
-
-#  resources {
-#        cores = "4"
-#        memory = "4"
-#  }
 
  boot_disk {
    initialize_params {
