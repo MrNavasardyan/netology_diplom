@@ -93,7 +93,7 @@
 #     centos
 #   roles:
 #     - gitlab-ce
-#     - runner
+
 
 - hosts: 
     proxy
@@ -106,3 +106,14 @@
   roles:
     - nginx-proxy
     # - letsencrypt
+
+- hosts: 
+    runner
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+    - runner

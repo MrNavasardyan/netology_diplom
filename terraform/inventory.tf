@@ -10,6 +10,9 @@ resource "local_file" "inventory" {
 
     [gitlab]
     gitlab.${var.my_domain} ansible_host=${yandex_compute_instance.gitlab.network_interface.0.nat_ip_address}
+
+    [runner]
+    runner.${var.my_domain} ansible_host=${yandex_compute_instance.runner.network_interface.0.nat_ip_address}
     
     [monitoring]
     monitoring.${var.my_domain} ansible_host=${yandex_compute_instance.monitoring.network_interface.0.nat_ip_address}
