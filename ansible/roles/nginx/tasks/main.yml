@@ -1,10 +1,4 @@
 ---
-# - name: (NGINX for APP) Install EPEL Repo
-#   yum:
-#     name=epel-release
-#     state=present
-
-    
 - name: (NGINX for APP) Install Nginx Web Server 
   yum:
     name=nginx
@@ -15,7 +9,3 @@
           
 - name: (NGINX for APP) Restart nginx
   service: name=nginx state=restarted
-
-
-
-

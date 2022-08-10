@@ -11,7 +11,7 @@
   - name: Turn off setsebool 
     shell: > 
         setsebool -P httpd_can_network_connect 1
-  - name: Turn off setsebool 
+  - name: Turn off setenforce
     shell: > 
         setenforce 0
   - name: Copy SE config
