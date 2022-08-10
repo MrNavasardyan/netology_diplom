@@ -57,6 +57,8 @@
  
 - name: (PROMETHEUS) Copy alert_rules
   copy: src=files/alert_rules.yml dest=/etc/prometheus/
+  owner: prometheus
+  group: prometheus
 
 - name: (PROMETHEUS) Systemctl Prometheus Start
   systemd:
