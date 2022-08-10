@@ -47,10 +47,10 @@ output "external_ip_address_vm_instance_monitoring" {
   value = yandex_compute_instance.monitoring.network_interface.0.nat_ip_address
 }
 
-output "internal_ip_address_vm_instance_monitoring" {
+output "internal_ip_address_vm_instance_runner" {
   value = yandex_compute_instance.runner.network_interface.0.ip_address
 }
 
-output "external_ip_address_vm_instance_monitoring" {
+output "external_ip_address_vm_instance_runner" {
   value = yandex_compute_instance.runner.network_interface.0.nat_ip_address
 }
