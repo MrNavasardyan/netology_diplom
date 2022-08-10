@@ -2,8 +2,11 @@
 # tasks file for grafana
 - name: (GRAFANA) Install Grafana Web Server on RedHat Family
   yum:
-    name=https://grafanarel.s3.amazonaws.com/builds/grafana-2.6.0-1.x86_64.rpm
+    name=https://dl.grafana.com/oss/release/grafana-9.0.7-1.x86_64.rpm
     state=present
+  # yum:
+  #   name=https://grafanarel.s3.amazonaws.com/builds/grafana-2.6.0-1.x86_64.rpm
+  #   state=present
 
 - name: (GRAFANA) Start service grafana-server, if not started
   ansible.builtin.service:
