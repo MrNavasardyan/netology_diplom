@@ -5,7 +5,7 @@
 #     state=present
 
     
-- name: (NGINX for APP) Install Nginx Web Server on RedHat Family
+- name: (NGINX for APP) Install Nginx Web Server 
   yum:
     name=nginx
     state=latest

@@ -2,6 +2,10 @@ resource "yandex_compute_instance" "db-master" {
  name = "db01-master"
  hostname = "db01.${var.my_domain}"
 
+#  resources {
+#        cores = "4"
+#        memory = "4"
+#  }
  resources {
        cores = "2"
        memory = "2"
@@ -29,8 +33,8 @@ resource "yandex_compute_instance" "db-slave" {
  hostname = "db02.${var.my_domain}"
 
  resources {
-       cores = "2"
-       memory = "2"
+       cores = "4"
+       memory = "4"
  }
 
  boot_disk {

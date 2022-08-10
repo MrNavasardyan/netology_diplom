@@ -3,8 +3,8 @@ resource "yandex_compute_instance" "monitoring" {
  hostname ="monitoring.${var.my_domain}"
 
  resources {
-       cores = "2"
-       memory = "2"
+       cores = "4"
+       memory = "4"
  }
 
  boot_disk {

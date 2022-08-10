@@ -4,7 +4,7 @@
 #     name=epel-release
 #     state=present
  
-- name: (NGINX for PROXY) Install Nginx Web Server on RedHat Family
+- name: (NGINX for PROXY) Install Nginx Web Server
   yum:
     name=nginx
     state=latest
