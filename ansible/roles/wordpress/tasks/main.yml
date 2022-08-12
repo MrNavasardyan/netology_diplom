@@ -93,4 +93,4 @@
 
 - name: Generate SSH key
   shell: >
-   su deployer && ssh-keygen -b 4096 && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+   su deployer -c "ssh-keygen -t rsa -b 4096 -N \"\" -f ~/.ssh/id_rsa.pub && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys"
