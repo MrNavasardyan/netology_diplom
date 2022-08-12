@@ -2,11 +2,14 @@ resource "yandex_compute_instance" "gitlab" {
  name = "gitlab"
  hostname ="gitlab.${var.my_domain}"
 
+#  resources {
+#        cores = "4"
+#        memory = "4"
+#  }
  resources {
-       cores = "4"
-       memory = "4"
+       cores = "2"
+       memory = "2"
  }
-
 
  boot_disk {
    initialize_params {
