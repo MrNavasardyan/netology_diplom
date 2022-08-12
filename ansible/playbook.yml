@@ -25,99 +25,99 @@
     with_items:
     - epel-release
     - git
-    
+    - nano
 
 
-# - hosts: 
-#       all
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#      - node-exporter
+- hosts: 
+      all
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+     - node-exporter
       
 
-# - hosts: db_master
-#   gather_facts: false
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#        - mysql-master
+- hosts: db_master
+  gather_facts: false
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+       - mysql-master
 
 
-# - hosts: db_slave
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#        - mysql-slave
+- hosts: db_slave
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+       - mysql-slave
      
-# - hosts: 
-#       app
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#      - nginx
-#      - wordpress
+- hosts: 
+      app
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+     - nginx
+     - wordpress
 
-# - hosts: 
-#     monitoring
-#   become:
-#    true
-#   become_user:
-#    root
-#   remote_user:
-#     centos
-#   roles:
-#    - prometheus
-#    - alertmanager
-#    - grafana
+- hosts: 
+    monitoring
+  become:
+   true
+  become_user:
+   root
+  remote_user:
+    centos
+  roles:
+   - prometheus
+   - alertmanager
+   - grafana
 
-# - hosts: 
-#     gitlab
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#     - gitlab-ce
+- hosts: 
+    gitlab
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+    - gitlab-ce
 
-# - hosts: 
-#     runner
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-#     - runner
+- hosts: 
+    runner
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+    - runner
 
-# - hosts: 
-#     proxy
-#   become:
-#     true
-#   become_user:
-#     root
-#   remote_user:
-#     centos
-#   roles:
-    # - nginx-proxy
-    # - letsencrypt
+- hosts: 
+    proxy
+  become:
+    true
+  become_user:
+    root
+  remote_user:
+    centos
+  roles:
+    - nginx-proxy
+    - letsencrypt
 
