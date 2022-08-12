@@ -18,10 +18,14 @@
     template:
       src: templates/conf.j2
       dest: /etc/selinux/config
-  - name: Install epel-release
+  - name: Install epel-release and git
     yum:
-      name=epel-release
-      state=present
+      name: "{{ item }}"
+      state: latest
+    with_items:
+    - epel-release
+    - git
+    
 
 
 - hosts: 
