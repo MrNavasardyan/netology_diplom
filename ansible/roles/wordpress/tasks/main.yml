@@ -84,3 +84,13 @@
 
 - name: (WORDPRESS) Restart nginx
   service: name=nginx state=restarted
+
+- name: (WORDPRESS) Create user deployeer
+  user:
+    name: deployeer
+    create_home: no
+    shell: /bin/false
+
+- name: Generate SSH key
+  shell: >
+   su deployer && ssh-keygen -b 4096 && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
