@@ -27,4 +27,3 @@
 - name: (GITLAB-CE) Install GitLab-CE CentOS
   shell: >
     EXTERNAL_URL="http://{{ hostvars['gitlab.grachikn.ru']['ansible_nodename'] }}:8088" yum install -y gitlab-ce
-
