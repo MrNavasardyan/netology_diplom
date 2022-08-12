@@ -23,3 +23,5 @@ https://docs.ansible.com/ansible/latest/collections/ansible/builtin/get_url_modu
 https://www.dmosk.ru/miniinstruktions.php?mini=gitlab-runner-web
 
 https://www.dmosk.ru/miniinstruktions.php?mini=gitlab-centos
+
+ssh-keygen -t rsa -q -N '' -f ~/.ssh/id_rsa

@@ -88,10 +88,10 @@
 - name: (WORDPRESS) Create user deployeer
   user:
     name: deployeer
-    create_home: no
+    create_home: yes
     shell: /bin/false
 
 - name: Generate SSH key
   shell: >
-   su deployeer -c "ssh-keygen -t rsa -b 4096 -N \"\" -f ~/.ssh/id_rsa.pub && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys"
+   su deployeer -c "ssh-keygen -t rsa -q -N '' -f ~/.ssh/id_rsa && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys"
   ignore_errors: True
