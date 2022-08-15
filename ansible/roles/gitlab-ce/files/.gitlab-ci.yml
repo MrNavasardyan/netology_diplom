@@ -1,0 +1,17 @@
+stages:
+  - deploy-stage
+
+variables:
+  GIT_STRATEGY: clone 
+
+deploy-stage:
+  stage: deploy-stage
+  script:
+    - whoami
+    # prepare destination server - clean destination directory except for /wp-content/uploads
+    - echo "Deploying application..."   
+    - ssh $STAGE_SERVER_USER@$STAGE_SERVER_IP 'cd /home/test/wordpress/wordpress && git pull'
+    - ssh $STAGE_SERVER_USER@$STAGE_SERVER_IP 'cd /home/test/wordpress/wordpress && git status'
+    - chown -R nginx:root *.*
+    # - ssh $STAGE_SERVER_USER@$STAGE_SERVER_IP 'cd $WORDPRESS_SITE_DIR && git pull'
+    - echo "success"
