@@ -24,4 +24,12 @@ https://www.dmosk.ru/miniinstruktions.php?mini=gitlab-runner-web
 
 https://www.dmosk.ru/miniinstruktions.php?mini=gitlab-centos
 
-ssh-keygen -t rsa -q -N '' -f ~/.ssh/id_rsa
+ssh-keygen -t rsa -q -N '' -f ~/.ssh/id_rsa (добавляем .pub в authorized на хосте, сеттинг /etc/ssh/sshd_config)
+
+cat /etc/gitlab/initial_root_password
+
+tar -xzvf latest.tar.gz
+git config --global --add safe.directory /home/test/wordpress/wordpress
+git config --global credential.helper store сохранить креды
+
+GIT_STRATEGY: clone
